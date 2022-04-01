@@ -23,10 +23,10 @@ public class Auction {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
-
+    
     @OneToOne
     private Objects objects;
-
+    
     @OneToOne
     private Customer customerSeller;
 
