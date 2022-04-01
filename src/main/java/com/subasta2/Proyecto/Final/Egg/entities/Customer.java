@@ -31,7 +31,9 @@ public class Customer {
     private String Dni;
     
     private String name;
-    private String lastName; 
+    private String lastName;     
+    private String email;    
+    private String password;
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
@@ -48,8 +50,6 @@ public class Customer {
     private List<Objects> objectHistorySold;
     
     private Double balance;
-    private Boolean active;
-    
-    
+    private Boolean active;   
     
 }
