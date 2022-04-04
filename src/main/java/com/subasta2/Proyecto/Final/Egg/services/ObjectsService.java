@@ -1,10 +1,11 @@
 package com.subasta2.Proyecto.Final.Egg.services;
 
-import com.subasta2.Proyecto.Final.Egg.entities.Auction;
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.exceptions.ExceptionService;
+import com.subasta2.Proyecto.Final.Egg.interfaces.ServiceInterface;
 import com.subasta2.Proyecto.Final.Egg.repositories.ObjectsRepository;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class ObjectsService {
 
     private ObjectsRepository objectsRepository;
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @Autowired
-    public ObjectsService(ObjectsRepository objectsRepository, CustomerRepository customerRepository) {
+    public ObjectsService(ObjectsRepository objectsRepository, CustomerService customerService) {
         this.objectsRepository = objectsRepository;
-        this.customerRepository = customerRepository;
+        this.customerService = customerService;
     }
 
     @Transactional(rollbackOn = {Exception.class})
@@ -43,29 +44,33 @@ public class ObjectsService {
     }
 
     @Transactional(rollbackOn = {Exception.class})
-    public Objects edit(String id, String name, String description, Double initialValue,
-            State state, Category category, String customerId, String auctionId) throws ExceptionService {
+    public void edit(Objects object) throws ExceptionService {
+        objectsRepository.save(object);
+    }
 
+    public List<Objects> showList() {
+        return objectsRepository.findAll();
+    }
+
+    public Objects showObject(String id) throws ExceptionService {
+        return findById(id);
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void activate(String id) throws ExceptionService {
         Objects object = findById(id);
-        if (!name.trim().isEmpty() || name != null) {
-            object.setName(name);
-        }
-        if (!description.trim().isEmpty() || description != null) {
-            object.setDescription(description);
-        }
-        if (!initialValue.toString().trim().isEmpty() || initialValue != null) {
-            object.setInitialValue(initialValue);
-        }
-        if (state != null) {
-            object.setState(state);
-        }
-        if (category != null) {
-            object.setCategory(category);
-        }
-        if (!customerId.trim().isEmpty() || customerId != null) {
-            object.setCustomer(findById);
-        }
-        return object;
+        object.setActive(true);
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void deactivate(String id) throws ExceptionService {
+        Objects object = findById(id);
+        object.setActive(false);
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void changeCustomer(Objects object, Customer customer) throws ExceptionService, Exception {
+        object.setCustomer(customerService.findById(customer.getId()));
     }
 
     public void validate(Objects object) throws ExceptionService {
@@ -87,10 +92,10 @@ public class ObjectsService {
         if (object.getInitialValue() == null) {
             throw new ExceptionService("El valor inicial esta vacio");
         }
-        if (object.getCategory == null) {
+        if (object.getCategory() == null) {
             throw new ExceptionService("Tiene que indicar la categoria");
         }
-        if (object.getState == null) {
+        if (object.getState() == null) {
             throw new ExceptionService("Tiene que indicar el estado");
         }
     }
