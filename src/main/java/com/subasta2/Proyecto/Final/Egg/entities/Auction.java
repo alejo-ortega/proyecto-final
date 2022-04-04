@@ -42,4 +42,6 @@ public class Auction {
     
     @OneToMany
     private List<Customer> customerList;
+    
+    private Boolean active;
 }
