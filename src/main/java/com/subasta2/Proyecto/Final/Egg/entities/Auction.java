@@ -1,3 +1,4 @@
+
 package com.subasta2.Proyecto.Final.Egg.entities;
 
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Auction {
-
+    
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -29,16 +30,18 @@ public class Auction {
     
     @OneToOne
     private Customer customerSeller;
-
+    
     @OneToOne
     private Customer customerBuyer;
-
+    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate auctionDate;
-
+    
     private Double minimumValue;
     private Double bid;
-
+    
     @OneToMany
     private List<Customer> customerList;
+    
+    private Boolean active;
 }
