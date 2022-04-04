@@ -1,9 +1,12 @@
 
 package com.subasta2.Proyecto.Final.Egg.entities;
 
+import com.subasta2.Proyecto.Final.Egg.enums.Role;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -34,6 +37,9 @@ public class Customer {
     private String lastName;     
     private String email;    
     private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;

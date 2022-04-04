@@ -3,13 +3,24 @@ package com.subasta2.Proyecto.Final.Egg.services;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.repositories.CustomerRepository;
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthoritiesContainer;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService{
     
     private CustomerRepository customerrepository;
     
@@ -26,7 +37,8 @@ public class CustomerService {
     }
     
     @Transactional (rollbackOn = {Exception.class})
-    public void edit(Customer customer) throws Exception{        
+    public void edit(Customer customer) throws Exception{      
+        validation(customer);
         customerrepository.save(customer);
     }    
     
@@ -94,5 +106,26 @@ public class CustomerService {
     
     @Transactional
     public void setStars(Customer customer,Integer stars){        
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        
+        Customer customer = customerrepository.findByEmailContaining(email);
+        
+        if (customer == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }
+        
+        List<GrantedAuthority> permissions = new ArrayList<>();
+        GrantedAuthority rolePermissions = new SimpleGrantedAuthority("ROLE_"+customer.getRole().toString());
+        permissions.add(rolePermissions);
+        
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        
+        HttpSession session = attr.getRequest().getSession(true);
+        session.setAttribute("customersession", customer);
+        
+        return new User(customer.getEmail(),customer.getPassword(),permissions);        
     }
 }
