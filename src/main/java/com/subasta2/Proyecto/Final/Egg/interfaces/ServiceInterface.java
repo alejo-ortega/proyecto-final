@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
  * @author Nico
  * @param <Object>
  */
-public interface ServiceInterface <Object>{
+public interface ServiceInterface <T>{
     
     /**
      * This method persists the changes into the Data Base.
@@ -17,7 +17,7 @@ public interface ServiceInterface <Object>{
      * @throws Exception 
      */
     @Transactional(rollbackOn = {Exception.class})
-    public void save (Object T) throws Exception;
+    public void save (T object) throws Exception;
     
     /**
      * This method is used to validate data entered by the user. It should help preventing
@@ -25,14 +25,14 @@ public interface ServiceInterface <Object>{
      * @param object
      * @throws Exception 
      */
-    public void validate (Object T) throws Exception;
+    public void validate (T object) throws Exception;
     
     /**
      * Shows a list with all the objects of the selected type.
      * @return 
      */
     @Transactional
-    public List <Object> showList();
+    public List <T> showList();
     
     /**
      * Shows one object based on its id attribute.
@@ -40,15 +40,15 @@ public interface ServiceInterface <Object>{
      * @return 
      */
     @Transactional
-    public Object showOne (String id);
+    public T showOne (String id);
     
     /**
      * Sets object attribute "active" to false
      */
-    public void deactivate ();
+    public void deactivate (T object) throws Exception;
     
     /**
      * Sets object attribute "active" to true
      */
-    public void activate ();
+    public void activate (T object) throws Exception;
 }
