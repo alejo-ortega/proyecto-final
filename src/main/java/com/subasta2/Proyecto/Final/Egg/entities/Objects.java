@@ -1,4 +1,3 @@
-
 package com.subasta2.Proyecto.Final.Egg.entities;
 
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
@@ -25,21 +24,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 
 public class Objects {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
-    
+
     private String name;
-    
+
     @OneToMany
     private List<Picture> picture;
-    
+
     private String description;
     private Double initialValue;
     private Double finalValue;
-    
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate soldDate;
     
@@ -51,11 +50,10 @@ public class Objects {
     
     private Boolean active;
     private Boolean sold;
-    
+
     @ManyToOne
     private Customer customer;
     @OneToOne
     private Auction auction;
-     
-    
+
 }
