@@ -32,7 +32,7 @@ public class Objects {
     @OneToMany
     private List<Picture> picture;
     
-    private String decription;
+    private String description;
     private Double initialValue;
     private Double finalValue;
     

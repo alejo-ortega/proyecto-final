@@ -25,7 +25,8 @@ public class Auction {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
     
-    private Object object;
+    @OneToOne
+    private Objects objects;
     
     @OneToOne
     private Customer customerSeller;
