@@ -37,20 +37,18 @@ public class CustomerController {
         return "customer/list-customers";
     }
     
-    @PostMapping
-    public String saveSwitch(@RequestParam String id, ModelMap model) throws Exception{
+    @PostMapping("/edit-profile")
+    public String activate(@RequestParam String id, ModelMap model){
         
-        Customer customer = customerService.findById(id);
-        
-        if(customer.getActive() || customer.getActive() == null){
+        try{
+            Customer customer = customerService.findById(id);
+            if(customer.getActive() || customer.getActive() == null){
             customer.setActive(Boolean.FALSE);
         }else {
             customer.setActive(Boolean.TRUE);
         }
-        try{
-            
         }catch (Exception e){
-            throw new Exception(e.getMessage());
+            model.put("error", e.getMessage());
         }
         
         return "redirect:/customer/list-customers";
