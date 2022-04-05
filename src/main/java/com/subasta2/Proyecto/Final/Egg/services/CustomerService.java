@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthoritiesContainer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -33,6 +33,7 @@ public class CustomerService implements UserDetailsService{
     public void register(Customer customer) throws Exception{  
         setOn(customer);
         validation(customer);
+        customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
         customerrepository.save(customer);        
     }
     
@@ -96,6 +97,17 @@ public class CustomerService implements UserDetailsService{
     public void deactivate(String id) throws Exception {
         Customer customer = findById(id);
         customer.setActive(false);
+    }
+    
+     @Transactional(rollbackOn = {Exception.class})
+    public void onOff(String id) throws Exception{
+        Customer customer = findById(id);
+         if (customer.getActive() == null || customer.getActive() == false) {
+            activate(id);
+         }else{
+            deactivate(id);            
+         }
+ 
     }
 
     private void setOn(Customer customer) {
