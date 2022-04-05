@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ObjectsService {
+public class ObjectsService implements ServiceInterface<Objects> {
 
     private ObjectsRepository objectsRepository;
     private CustomerService customerService;
@@ -21,13 +21,6 @@ public class ObjectsService {
     public ObjectsService(ObjectsRepository objectsRepository, CustomerService customerService) {
         this.objectsRepository = objectsRepository;
         this.customerService = customerService;
-    }
-
-    @Transactional(rollbackOn = {Exception.class})
-    public void create(Objects object) throws ExceptionService {
-        validate(object);
-        object.setActive(true);
-        objectsRepository.save(object);
     }
 
     public Objects findById(String id) throws ExceptionService {
@@ -50,22 +43,6 @@ public class ObjectsService {
 
     public List<Objects> showList() {
         return objectsRepository.findAll();
-    }
-
-    public Objects showObject(String id) throws ExceptionService {
-        return findById(id);
-    }
-
-    @Transactional(rollbackOn = {Exception.class})
-    public void activate(String id) throws ExceptionService {
-        Objects object = findById(id);
-        object.setActive(true);
-    }
-
-    @Transactional(rollbackOn = {Exception.class})
-    public void deactivate(String id) throws ExceptionService {
-        Objects object = findById(id);
-        object.setActive(false);
     }
 
     @Transactional(rollbackOn = {Exception.class})
@@ -98,5 +75,38 @@ public class ObjectsService {
         if (object.getState() == null) {
             throw new ExceptionService("Tiene que indicar el estado");
         }
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    @Override
+    public void save(Objects object) throws Exception {
+        validate(object);
+        object.setActive(true);
+        objectsRepository.save(object);
+    }
+
+    @Override
+    public Objects showOne(String id) throws ExceptionService {
+        return findById(id);
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    @Override
+    public void deactivate(Objects object) throws Exception {
+        Objects object1 = findById(object.getId());
+        object1.setActive(false);
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    @Override
+    public void activate(Objects object) throws Exception {
+        Objects object1 = findById(object.getId());
+        object1.setActive(true);
+
+    }
+
+    public void onOff(String id) throws ExceptionService {
+        Objects object = findById(id);
+        object.setActive(!object.getActive());
     }
 }
