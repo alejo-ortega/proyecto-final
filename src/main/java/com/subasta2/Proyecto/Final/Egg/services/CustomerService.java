@@ -106,8 +106,7 @@ public class CustomerService implements UserDetailsService{
             activate(id);
          }else{
             deactivate(id);            
-         }
- 
+         } 
     }
 
     private void setOn(Customer customer) {
