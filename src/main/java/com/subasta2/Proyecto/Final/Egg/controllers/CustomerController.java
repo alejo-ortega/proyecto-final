@@ -38,24 +38,16 @@ public class CustomerController {
     }
     
     @PostMapping("/edit-profile")
-    public String activate(@RequestParam String id, ModelMap model){
+    public String activatePost(@RequestParam String id, ModelMap model){
         
         try{
-            Customer customer = customerService.findById(id);
-            if(customer.getActive() || customer.getActive() == null){
-            customer.setActive(Boolean.FALSE);
-        }else {
-            customer.setActive(Boolean.TRUE);
-        }
+            customerService.onOff(id);
         }catch (Exception e){
             model.put("error", e.getMessage());
         }
         
         return "redirect:/customer/list-customers";
     }
-    
-    
-    
     
     @GetMapping("/form")
     public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception{

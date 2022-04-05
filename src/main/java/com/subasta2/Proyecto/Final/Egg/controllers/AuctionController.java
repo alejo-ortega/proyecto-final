@@ -2,6 +2,7 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class AuctionController {
         if(id == null){
             model.addAttribute("auction", new Auction());
         } else{
-            Auction auction = auctionService.findById(id);
+            Auction auction = auctionService.showOne(id);
             model.addAttribute("auction", auction);
             //auctionService.edit(auction);?????
         }
@@ -45,7 +46,7 @@ public class AuctionController {
     public String processForm(@ModelAttribute Auction auction, ModelMap model){
         System.out.println("auction ="+ auction );
         try{
-            auctionService.register(auction);
+            auctionService.save(auction);
         }catch(Exception e){
             model.addAttribute("error "+ e.getMessage());
             return "redirect:";
