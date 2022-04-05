@@ -2,10 +2,15 @@ com\subasta2\Proyecto\Final\Egg\entities\Picture.class
 com\subasta2\Proyecto\Final\Egg\entities\Auction.class
 com\subasta2\Proyecto\Final\Egg\enums\State.class
 com\subasta2\Proyecto\Final\Egg\repositories\CustomerRepository.class
+com\subasta2\Proyecto\Final\Egg\config\SecurityConfig.class
 com\subasta2\Proyecto\Final\Egg\ProyectoFinalEggApplication.class
 com\subasta2\Proyecto\Final\Egg\services\CustomerService.class
+com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.class
 com\subasta2\Proyecto\Final\Egg\interfaces\ServiceInterface.class
+com\subasta2\Proyecto\Final\Egg\services\AuctionService.class
+com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.class
 com\subasta2\Proyecto\Final\Egg\enums\Category.class
+com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.class
 com\subasta2\Proyecto\Final\Egg\entities\Objects.class
 com\subasta2\Proyecto\Final\Egg\enums\Role.class
 com\subasta2\Proyecto\Final\Egg\entities\Customer.class
