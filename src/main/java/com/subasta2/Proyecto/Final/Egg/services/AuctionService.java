@@ -39,7 +39,7 @@ public class AuctionService implements ServiceInterface<Auction> {
     }
 
     @Override
-    public Auction showOne(String id) {
+    public Auction showOne(String id) throws Exception{
         return auctionRepository.findById(id).orElse(null);
     }
 

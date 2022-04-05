@@ -31,7 +31,7 @@ public interface ServiceInterface <T>{
      * Shows a list with all the objects of the selected type.
      * @return 
      */
-    @Transactional
+    @Transactional(rollbackOn = {Exception.class})
     public List <T> showList();
     
     /**
@@ -39,8 +39,8 @@ public interface ServiceInterface <T>{
      * @param id
      * @return 
      */
-    @Transactional
-    public T showOne (String id);
+    @Transactional(rollbackOn = {Exception.class})
+    public T showOne (String id) throws Exception;
     
     /**
      * Sets object attribute "active" to false
