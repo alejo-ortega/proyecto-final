@@ -10,6 +10,7 @@ com\subasta2\Proyecto\Final\Egg\interfaces\ServiceInterface.class
 com\subasta2\Proyecto\Final\Egg\services\AuctionService.class
 com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.class
 com\subasta2\Proyecto\Final\Egg\enums\Category.class
+com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.class
 com\subasta2\Proyecto\Final\Egg\entities\Objects.class
 com\subasta2\Proyecto\Final\Egg\enums\Role.class
 com\subasta2\Proyecto\Final\Egg\entities\Customer.class

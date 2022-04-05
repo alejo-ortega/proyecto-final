@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\State.java
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\CustomerRepository.java
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\CustomerService.java
@@ -14,3 +15,22 @@ F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\E
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.java
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\ServletInitializer.java
 F:\Egg\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Category.java
+=======
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Auction.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Role.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\AuctionService.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Category.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\CustomerService.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\interfaces\ServiceInterface.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\ProyectoFinalEggApplication.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\ServletInitializer.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Picture.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\CustomerRepository.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Customer.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Objects.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\config\SecurityConfig.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\State.java
+E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.java
+>>>>>>> ba3179c261ce104827bcb2ccfbafd759cb8004ae
