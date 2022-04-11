@@ -32,7 +32,7 @@ public class CustomerService implements UserDetailsService{
         this.customerrepository = customerrepository;
         this.ps = ps;
     }
-    
+        
     @Transactional (rollbackOn = {Exception.class})
     public void register(Customer customer, MultipartFile file) throws Exception{  
         setOn(customer);
