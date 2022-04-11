@@ -6,6 +6,7 @@ import com.subasta2.Proyecto.Final.Egg.repositories.AuctionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class AuctionService implements ServiceInterface<Auction> {
@@ -54,5 +55,9 @@ public class AuctionService implements ServiceInterface<Auction> {
         auction.setActive(Boolean.TRUE);
         save(auction);
     }
-  
+    
+    public void edit (Auction auction) throws Exception{
+        validate(auction);
+        auctionRepository.save(auction);
+    }
 }

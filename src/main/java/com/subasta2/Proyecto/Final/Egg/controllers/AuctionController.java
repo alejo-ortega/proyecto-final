@@ -23,28 +23,51 @@ public class AuctionController {
         this.auctionService = auctionService;
     }
     
+    /**
+     * Sends the auction list to the HTML by a model, so it can be shown on the
+     * FrontEnd.
+     * @param model
+     * @return 
+     */
     @GetMapping
     public String showList(ModelMap model){
-        List<Auction> auction = auctionService.showList() ;
-        model.addAttribute("auctions", auction);
+        List<Auction> auctions = auctionService.showList() ;
+        model.addAttribute("auctions", auctions);
         return "auction/list-auctions";
     }
     
+    /**
+     * Shows a Form tha allows the seller to create a new auction. If the auction
+     * already exist, the method allows you to edit its values.
+     * @param model
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     @GetMapping("/form")
-    public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception{
-        if(id == null){
+    public String showForm(ModelMap model, @RequestParam(required = false) String id){
+        
+        try {
+            if(id == null){
             model.addAttribute("auction", new Auction());
         } else{
             Auction auction = auctionService.showOne(id);
             model.addAttribute("auction", auction);
-            //auctionService.edit(auction);?????
+            auctionService.edit(auction);
+        }
+        } catch (Exception e) {
         }
         return "auction/form";
     }
     
+    /**
+     * This method persist the auction information into the DataBase
+     * @param auction
+     * @param model
+     * @return 
+     */
     @PostMapping("/form")
     public String processForm(@ModelAttribute Auction auction, ModelMap model){
-        System.out.println("auction ="+ auction );
         try{
             auctionService.save(auction);
         }catch(Exception e){
