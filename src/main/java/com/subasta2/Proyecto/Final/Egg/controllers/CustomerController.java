@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/customer")
@@ -79,12 +80,12 @@ public class CustomerController {
     }
 
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Customer customer, ModelMap model) {
-        System.out.println("Customer =" + customer);
-        try {
-            customerService.register(customer);
-        } catch (Exception e) {
-            model.addAttribute("error " + e.getMessage());
+    public String processForm(@ModelAttribute Customer customer, ModelMap model, MultipartFile file){
+        System.out.println("Customer ="+ customer );
+        try{
+            customerService.register(customer,file);
+        }catch(Exception e){
+            model.addAttribute("error "+ e.getMessage());
             return "redirect:";
         }
         return "redirect:/customer";

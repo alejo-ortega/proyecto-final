@@ -2,6 +2,7 @@
 package com.subasta2.Proyecto.Final.Egg.services;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
+import com.subasta2.Proyecto.Final.Egg.entities.Picture;
 import com.subasta2.Proyecto.Final.Egg.repositories.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,28 +19,45 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CustomerService implements UserDetailsService{
     
     private CustomerRepository customerrepository;
+    private PictureService ps;
     
     @Autowired    
-    public CustomerService(CustomerRepository customerrepository) {
+    public CustomerService(CustomerRepository customerrepository, PictureService ps) {
         this.customerrepository = customerrepository;
+        this.ps = ps;
     }
-    
+        
     @Transactional (rollbackOn = {Exception.class})
-    public void register(Customer customer) throws Exception{  
+    public void register(Customer customer, MultipartFile file) throws Exception{  
         setOn(customer);
         validation(customer);
+        
+        Picture picture = ps.save(file);
+        customer.setPicture(picture);
+        
         customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
         customerrepository.save(customer);        
     }
-    
+        
     @Transactional (rollbackOn = {Exception.class})
-    public void edit(Customer customer) throws Exception{      
+    public void edit(Customer customer, MultipartFile file) throws Exception{      
         validation(customer);
+        
+        String idPicture = null;
+        if (customer.getPicture() != null) {
+            idPicture = customer.getPicture().getId();
+        }
+        Picture picture = ps.edit(idPicture,file);
+        customer.setPicture(picture);        
+        
+        customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
+        
         customerrepository.save(customer);
     }    
     
@@ -106,8 +124,7 @@ public class CustomerService implements UserDetailsService{
             activate(id);
          }else{
             deactivate(id);            
-         }
- 
+         } 
     }
 
     private void setOn(Customer customer) {
