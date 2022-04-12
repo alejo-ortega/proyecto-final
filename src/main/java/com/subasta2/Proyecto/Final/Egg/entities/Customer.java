@@ -40,7 +40,7 @@ public class Customer {
     
     @Enumerated(EnumType.STRING)
     private Role role;
-    
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
      
