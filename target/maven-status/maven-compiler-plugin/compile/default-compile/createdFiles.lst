@@ -8,18 +8,26 @@ com\subasta2\Proyecto\Final\Egg\services\AuctionService.class
 com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.class
 com\subasta2\Proyecto\Final\Egg\enums\Category.class
 com\subasta2\Proyecto\Final\Egg\exceptions\ExceptionService.class
+<<<<<<< HEAD
+=======
 com\subasta2\Proyecto\Final\Egg\services\ObjectsService.class
+>>>>>>> 281b30813623bf6782db56a2185795ed9d62033e
 com\subasta2\Proyecto\Final\Egg\entities\Objects.class
 com\subasta2\Proyecto\Final\Egg\controllers\IndexController.class
 com\subasta2\Proyecto\Final\Egg\enums\Role.class
 com\subasta2\Proyecto\Final\Egg\repositories\ObjectsRepository.class
 com\subasta2\Proyecto\Final\Egg\entities\Auction.class
 com\subasta2\Proyecto\Final\Egg\enums\State.class
+<<<<<<< HEAD
+com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.class
+com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.class
+=======
 com\subasta2\Proyecto\Final\Egg\services\PictureService.class
 com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.class
 com\subasta2\Proyecto\Final\Egg\controllers\CustomerController.class
 com\subasta2\Proyecto\Final\Egg\controllers\ObjectController.class
 com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.class
 com\subasta2\Proyecto\Final\Egg\repositories\PictureRepository.class
+>>>>>>> 281b30813623bf6782db56a2185795ed9d62033e
 com\subasta2\Proyecto\Final\Egg\entities\Customer.class
 com\subasta2\Proyecto\Final\Egg\ServletInitializer.class

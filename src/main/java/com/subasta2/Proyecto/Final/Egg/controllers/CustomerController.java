@@ -1,4 +1,3 @@
-
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
@@ -17,51 +16,69 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
-    
-    private  CustomerService customerService;
-    
+
+    private CustomerService customerService;
+
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
-    
+
     @GetMapping
-    public String showList(ModelMap model){
-        List<Customer> customers = customerService.showList() ;
-        model.addAttribute("customers", customers);
-        return "customer/list-customers";
-    }
-    
-    @GetMapping("/edit-profile")
-    public String activate(@RequestParam String id, ModelMap model) throws Exception{
-        model.addAttribute("customer", customerService.findById(id));
-        return "customer/list-customers";
-    }
-    
-    @PostMapping("/edit-profile")
-    public String activatePost(@RequestParam String id, ModelMap model){
+    public String showList(ModelMap model) {
         
         try{
-            customerService.onOff(id);
+            List<Customer> customers = customerService.showList();
+            model.addAttribute("customers", customers);
+            return "customer/list-customers";
+        }catch(Exception e){
+            model.put("error", e.getMessage());
+            return "/customers/list-customers";
+        }
+    }
+
+    @GetMapping("/edit-profile")
+    public String activate(@RequestParam String id, ModelMap model) throws Exception {
+        
+        try{
+            model.addAttribute("customer", customerService.findById(id));
         }catch (Exception e){
             model.put("error", e.getMessage());
+            return "/customers/list-customers";
         }
         
+        return "customer/list-customers";
+    }
+
+    @PostMapping("/edit-profile")
+    public String activatePost(@RequestParam String id, ModelMap model) {
+
+        try {
+            customerService.onOff(id);
+        } catch (Exception e) {
+            model.put("error", e.getMessage());
+            return "/customers/list-customers";
+        }
+
         return "redirect:/customer/list-customers";
     }
-    
+
     @GetMapping("/form")
-    public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception{
-        if(id == null){
-            model.addAttribute("customer", new Customer());
-        } else{
-            Customer customer = customerService.findById(id);
-            model.addAttribute("customer", customer);
-            //customerService.edit(customer);
+    public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception {
+        try {
+            if (id == null) {
+                model.addAttribute("customer", new Customer());
+            } else {
+                Customer customer = customerService.findById(id);
+                model.addAttribute("customer", customer);
+            }
+        } catch (Exception e) {
+            model.put("error", e.getMessage());
+            return "/customers/list-customers";
         }
         return "customer/form";
     }
-    
+
     @PostMapping("/form")
     public String processForm(@ModelAttribute Customer customer, ModelMap model, MultipartFile file){
         System.out.println("Customer ="+ customer );
@@ -73,11 +90,9 @@ public class CustomerController {
         }
         return "redirect:/customer";
     }
-    
+
 //    Dar de baja
 //Validar usuario antes de la compra (verificar que sea el usuario a través de mail y contraseña)
 //Validar si el usuario está en estado de alta al loguearse
 //Puntuar a otro usuario
-
-    
 }
