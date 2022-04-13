@@ -34,7 +34,6 @@ public class Objects {
 
     @OneToMany
     private List<Picture> picture;
-
     private String description;
     private Double initialValue;
     private Double finalValue;
