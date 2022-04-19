@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,27 +27,11 @@
                         <input style="margin-top: 30px; height: 30px; text-align: center; font-size: 25px; width: 60%;" type="text" placeholder="Buscar" name="" id="">
                         <br>
                         <select name="Tipo" style="width: 40%; margin-top: 30px;">
-                            
-                            <option value="">Categoria</option>
-        
-                            <option>Coche</option>
-                            
-                            <option>Avión</option>
-                            
-                            <option>Tren</option>
-                            
+                            <option th:each="category : ${categories}" th:text="${category}"></option>
                         </select>
                         <br>
                         <select name="Estado" style="width: 40%; margin-top: 30px;">
-        
-                            <option>Estado</option>
-        
-                            <option>Nuevo</option>
-                            
-                            <option>Usado</option>
-                            
-                            <option>Roto</option>
-                            
+                            <option th:each="state : ${states}" th:text="${state}" ></option>
                         </select>
                         <br>
                         <select name="transporte" style="width: 40%; margin-top: 30px;">
@@ -82,48 +67,30 @@
                 <section>
                     <input style="margin-top: 30px; height: 30px; text-align: center; font-size: 25px; width: 60%;" type="text" placeholder="Buscar" name="" id="">
                     <br>
-                    <select name="Tipo" style="width: 40%; margin-top: 30px;">
-                        
-                        <option value="">Categoria</option>
-    
-                        <option>Coche</option>
-                        
-                        <option>Avión</option>
-                        
-                        <option>Tren</option>
-                        
+                    <label>Categoria:</label>
+                    <select  name="Tipo" style="width: 40%; margin-top: 30px;">
+                        <option th:each="category : ${categories}" th:text="${category}">
                     </select>
                     <br>
+                    <label>Estado:</label>
                     <select name="Estado" style="width: 40%; margin-top: 30px;">
-    
-                        <option>Estado</option>
-    
-                        <option>Nuevo</option>
-                        
-                        <option>Usado</option>
-                        
-                        <option>Roto</option>
-                        
+                        <option th:each="state : ${states}" th:text="${state}">
                     </select>
                     <br>
+                    <label>Envio:</label>
                     <select name="transporte" style="width: 40%; margin-top: 30px;">
-    
-                        <option value="">Envio</option>
-    
                         <option>Si</option>
-                        
                         <option>No</option>
-                        
                     </select>
                     <br>
-                    <input type="text" placeholder="Precio minimo" style="width: 60%; text-align: center; margin-top: 30px"><br>
-                    <input type="text" placeholder="Precio maximo" style="width: 60%; text-align: center; margin-top: 30px"><br>
+                    <input type="number" placeholder="Precio minimo" style="width: 60%; text-align: center; margin-top: 30px"><br>
+                    <input type="number" placeholder="Precio maximo" style="width: 60%; text-align: center; margin-top: 30px"><br>
                 </section>
                 <button style="margin-top: 30%; width: 50%; font-size: 25px;" class="btn first">Buscar</button>
             </section>
-            <section class="s2">
-                    <section class="card">                    
-                        <p>Nombre del producto</p>
+            <section class="s2" th:each="auction : ${auctionList}">
+                    <section class="card"> 
+                        <p th:text="${auction.objects.name}"></p>
                         <section class="card2">
                             <section class="card-box1">
                                 <img class="img-card" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="">
@@ -131,29 +98,12 @@
                             </section>
                             <section class="card-box2">
                                 <p>Descripcion del producto:</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p th:text="${auction.objects.description}"></p>
                                 <i class='bx bx-cart-add bx-lg'></i>
                             </section>
                         </section>
-                    </section>
-                    <section class="card">                    
-                        <p>Nombre del producto</p>
-                        <section class="card2">
-                            <section class="card-box1">
-                                <img class="img-card" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="">
-                                <p>DESDE-HASTA</p>
-                            </section>
-                            <section class="card-box2">
-                                <p>Descripcion del producto:</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                                <i class='bx bx-cart-add bx-lg'></i>
-                            </section>
-                        </section>
-                    </section>
-                
                 <!--Una box2 contiene 2 card que cada una contiene todo lo que lleva lo que se muestra al cliente
                 cada card tiene un titulo una imagen una fecha descripcion y boton  -->
-
             </section>
         </div>
         
@@ -170,7 +120,7 @@
         let buscar2 =document.getElementById('buscar2');
         let buscar = document.getElementById('buscar');
         menu.addEventListener('click', ()=>{
-            menu2.classList.toggle("none"); 
+            menu2.classList.toggle("none");     
         });
         buscar.addEventListener('click', ()=>{
             buscar2.classList.toggle("none");

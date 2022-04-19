@@ -1,10 +1,13 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.enums.Category;
+import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import com.subasta2.Proyecto.Final.Egg.services.CustomerService;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
 import com.subasta2.Proyecto.Final.Egg.services.PictureService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +37,21 @@ public class IndexController {
         try {
             List<Auction> auctionList = as.showList();
             model.addAttribute("auctionList", auctionList);
-            return "/index";
+            List<String> categories = new ArrayList();
+            for (Category category : Category.values()) {
+                categories.add(category.getValor());
+            }
+            model.addAttribute("categories", categories);
+            List<String> states = new ArrayList();
+            for (State state : State.values()) {
+                states.add(state.getValor());
+            }
+            model.addAttribute("states", states);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage().toString());
-            return "/index";
-        }        
+            return "index";
+        }
+        return "index";
     }
     
     
