@@ -60,4 +60,5 @@ public class AuctionService implements ServiceInterface<Auction> {
         validate(auction);
         auctionRepository.save(auction);
     }
+    
 }

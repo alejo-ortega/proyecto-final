@@ -2,6 +2,7 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/auction")
 public class AuctionController {
+    
+    private final ObjectController objectController;
     private final AuctionService auctionService;
     
     @Autowired
-    public AuctionController(AuctionService auctionService){
+    public AuctionController(AuctionService auctionService, ObjectController objectController){
         this.auctionService = auctionService;
+        this.objectController = objectController;
     }
+    
+    
     
     /**
      * Sends the auction list to the HTML by a model, so it can be shown on the
@@ -33,31 +39,30 @@ public class AuctionController {
     public String showList(ModelMap model){
         List<Auction> auctions = auctionService.showList() ;
         model.addAttribute("auctions", auctions);
+        Category[]  categories = Category.values();
         return "auction/list-auctions";
     }
     
     /**
-     * Shows a Form tha allows the seller to create a new auction. If the auction
-     * already exist, the method allows you to edit its values.
+     * Shows a Form tha allows the seller to create a new auction.If the auction
+ already exist, the method allows you to edit its values.
+     * @param categoryModel
+     * @param stateModel
      * @param model
+     * @param objectModel
+     * @param auctionModel
      * @param id
      * @return
-     * @throws Exception 
      */
     @GetMapping("/form")
-    public String showForm(ModelMap model, @RequestParam(required = false) String id){
+    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel, @RequestParam(required = false) String id){
         
         try {
-            if(id == null){
-            model.addAttribute("auction", new Auction());
-        } else{
-            Auction auction = auctionService.showOne(id);
-            model.addAttribute("auction", auction);
-            auctionService.edit(auction);
-        }
+            objectController.categoryList(categoryModel);
+            objectController.stateList(stateModel);
         } catch (Exception e) {
         }
-        return "auction/form";
+        return "auction/auction-form";
     }
     
     /**
