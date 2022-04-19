@@ -19,5 +19,6 @@ public enum State {
     public String getValor() {
         return valor;
     }
+
     
 }

@@ -19,5 +19,5 @@ public enum Category {
     public String getValor() {
         return valor;
     }
-    
+
 }

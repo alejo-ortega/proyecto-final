@@ -37,7 +37,7 @@ public interface ServiceInterface<T> {
      * @return
      */
     @Transactional(rollbackOn = {Exception.class})
-    public List<T> showList();
+    public List <T> showList();
 
     /**
      * Shows one object based on its id attribute.
@@ -46,8 +46,8 @@ public interface ServiceInterface<T> {
      * @return
      */
     @Transactional(rollbackOn = {Exception.class})
-    public T showOne(String id) throws Exception;
-
+    public T showOne (String id) throws Exception;
+    
     /**
      * Sets object attribute "active" to false
      */
