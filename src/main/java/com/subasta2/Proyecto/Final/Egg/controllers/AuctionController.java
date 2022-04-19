@@ -39,7 +39,7 @@ public class AuctionController {
             model.addAttribute("auction", auction);
             //auctionService.edit(auction);?????
         }
-        return "auction/form";
+        return "auction/subastar";
     }
     
     @PostMapping("/form")

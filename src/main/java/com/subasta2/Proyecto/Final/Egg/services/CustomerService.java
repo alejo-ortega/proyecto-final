@@ -44,6 +44,23 @@ public class CustomerService implements UserDetailsService{
         customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
         customerrepository.save(customer);        
     }
+    
+    @Transactional (rollbackOn = {Exception.class})
+    public void login (Customer customer)throws Exception{
+        setOn(customer);
+        
+        if (customer.getEmail().isEmpty() || customer.getEmail().contains(" ") || customer.getEmail() == null) {
+            throw new Exception("El email ingresado es invalido");
+        }        
+        if (customer.getPassword().isEmpty() || customer.getPassword().contains(" ") || customer.getPassword() == null) {
+            throw new Exception("La contraseña ingresada es invalida");
+        }  
+        
+        
+        
+        
+    }
+    
         
     @Transactional (rollbackOn = {Exception.class})
     public void edit(Customer customer, MultipartFile file) throws Exception{      
@@ -76,7 +93,9 @@ public class CustomerService implements UserDetailsService{
     public List<Customer> showList(){
         return customerrepository.findAll();
     }
-        
+    
+    
+    
     public Customer showObject(String id) throws Exception{
         return findById(id);
     }
@@ -117,7 +136,7 @@ public class CustomerService implements UserDetailsService{
         customer.setActive(false);
     }
     
-     @Transactional(rollbackOn = {Exception.class})
+    @Transactional(rollbackOn = {Exception.class})
     public void onOff(String id) throws Exception{
         Customer customer = findById(id);
          if (customer.getActive() == null || customer.getActive() == false) {

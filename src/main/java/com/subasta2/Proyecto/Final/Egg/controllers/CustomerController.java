@@ -62,7 +62,35 @@ public class CustomerController {
 
         return "redirect:/customer/list-customers";
     }
-
+    
+    @GetMapping("/login-form")
+    public String ShowLogin(ModelMap model, @RequestParam(required = false) String id) throws Exception{
+        try{
+            if(id != null){
+                Customer customer = customerService.findById(id);
+                model.addAttribute("customer", customer);
+            }
+            
+        }catch(Exception e){
+            model.put("error", e.getMessage());
+            return "/login-form";
+        }
+        
+        return "/login-form";
+    } // formulario para el inicio de sesión
+    
+    @PostMapping("/login-form")
+    public String processLogin(@ModelAttribute Customer customer, ModelMap model)throws Exception{
+        System.out.println("Customer = "+ customer);
+        try{
+            customerService.login(customer);
+        }catch(Exception e){
+            model.addAttribute("error "+ e.getMessage());
+            return "login-form";
+        }
+        return "login-form";
+    }
+    
     @GetMapping("/form")
     public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception {
         try {
