@@ -38,7 +38,7 @@ public class CustomerController {
     }
 
     @GetMapping("/edit-profile")
-    public String activate(@RequestParam String id, ModelMap model) throws Exception {
+    public String activate(@RequestParam String id, ModelMap model){
         
         try{
             model.addAttribute("customer", customerService.findById(id));
@@ -63,60 +63,43 @@ public class CustomerController {
         return "redirect:/customer/list-customers";
     }
     
-    @GetMapping("/login-form")
-    public String ShowLogin(ModelMap model, @RequestParam(required = false) String id) throws Exception{
-        try{
-            if(id != null){
-                Customer customer = customerService.findById(id);
-                model.addAttribute("customer", customer);
-            }
-            
-        }catch(Exception e){
-            model.put("error", e.getMessage());
-            return "/login-form";
-        }
-        
-        return "/login-form";
-    } // formulario para el inicio de sesión
+    /*
     
-    @PostMapping("/login-form")
-    public String processLogin(@ModelAttribute Customer customer, ModelMap model)throws Exception{
-        System.out.println("Customer = "+ customer);
-        try{
-            customerService.login(customer);
-        }catch(Exception e){
-            model.addAttribute("error "+ e.getMessage());
-            return "login-form";
-        }
-        return "login-form";
-    }
+    modifique tanto en el GetMapping como en El PostMapping 
+    para poder hacer un buen uso de los recursos tanto como en registar como editar,
+    lo probe con un usuario y me ha handado bien cualquier bug porfavor reportarlo a su superior al mando
+    
+    */
     
     @GetMapping("/form")
-    public String showForm(ModelMap model, @RequestParam(required = false) String id) throws Exception {
+    public String showForm(ModelMap model, @RequestParam(required = false) String id){
         try {
             if (id == null) {
                 model.addAttribute("customer", new Customer());
+                return "customer/form";
             } else {
                 Customer customer = customerService.findById(id);
                 model.addAttribute("customer", customer);
+                return "customer/form";
             }
         } catch (Exception e) {
             model.put("error", e.getMessage());
-            return "/customers/list-customers";
+            return "customer/form";
         }
-        return "customer/form";
+        
     }
 
     @PostMapping("/form")
     public String processForm(@ModelAttribute Customer customer, ModelMap model, MultipartFile file){
-        System.out.println("Customer ="+ customer );
+        
         try{
             customerService.register(customer,file);
+            return "index";
         }catch(Exception e){
-            model.addAttribute("error "+ e.getMessage());
-            return "redirect:";
-        }
-        return "redirect:/customer";
+            model.addAttribute("error ", e.getMessage());
+            model.addAttribute("customer",customer);
+            return "customer/form";
+        }        
     }
 
 //    Dar de baja

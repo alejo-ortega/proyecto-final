@@ -2,6 +2,8 @@ package com.subasta2.Proyecto.Final.Egg.services;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
+import com.subasta2.Proyecto.Final.Egg.enums.Category;
+import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.exceptions.ExceptionService;
 import com.subasta2.Proyecto.Final.Egg.interfaces.ServiceInterface;
 import com.subasta2.Proyecto.Final.Egg.repositories.ObjectsRepository;
@@ -108,5 +110,15 @@ public class ObjectsService implements ServiceInterface<Objects> {
     public void onOff(String id) throws ExceptionService {
         Objects object = findById(id);
         object.setActive(!object.getActive());
+    }
+    
+    public Category[] categoryArray (){
+        Category[] categories = Category.values();
+        return categories;
+    }
+    
+    public State[] stateArray (){
+        State[] states = State.values();
+        return states;
     }
 }

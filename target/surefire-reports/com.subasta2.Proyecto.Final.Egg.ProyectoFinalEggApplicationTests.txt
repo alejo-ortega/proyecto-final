@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
+<<<<<<< HEAD
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.302 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.757 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
+>>>>>>> ba3179c261ce104827bcb2ccfbafd759cb8004ae
+=======
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.346 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
+>>>>>>> a0c501be8b6a0ed2a90b24a661e94886d57c2cb1

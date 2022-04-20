@@ -1,6 +1,8 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
+import com.subasta2.Proyecto.Final.Egg.enums.Category;
+import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ObjectController {
 
-    private ObjectsService objectService;
+    ObjectsService objectService;
 
     @Autowired
     public ObjectController(ObjectsService objectService) {
@@ -101,5 +103,17 @@ public class ObjectController {
             return "object/edit";
         }
         return "redirect:/object";
+    }
+    
+    public void categoryList (ModelMap model){
+        
+        Category [] categories = objectService.categoryArray();
+        model.addAttribute("categories", categories);
+    }
+    
+    public void stateList (ModelMap model){
+        
+        State [] states = objectService.stateArray();
+        model.addAttribute("states", states);
     }
 }
