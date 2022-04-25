@@ -1,5 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
-Test set: com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 143.052 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
 -------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.011 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests

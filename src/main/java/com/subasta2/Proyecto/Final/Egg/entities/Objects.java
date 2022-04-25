@@ -40,13 +40,11 @@ public class Objects {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate soldDate;
-    
-    @Enumerated(EnumType.STRING)
-    private State state;
-    
-    @Enumerated(EnumType.STRING)
-     private Category category;
-    
+
+    private String state;
+   
+    private String category;
+
     private Boolean active;
     private Boolean sold;
 

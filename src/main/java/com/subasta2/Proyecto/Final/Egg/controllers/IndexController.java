@@ -13,17 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/")
 @Controller
 public class IndexController {
-    
+
     private CustomerService cs;
     private AuctionService as;
     private ObjectsService os;
     private PictureService ps;
-    
+
     @Autowired
     public IndexController(CustomerService cs, AuctionService as, ObjectsService os, PictureService ps) {
         this.cs = cs;
@@ -31,28 +33,38 @@ public class IndexController {
         this.os = os;
         this.ps = ps;
     }
-    
+
     @GetMapping
-    public String index(ModelMap model){
+    public String index(ModelMap model) {
         try {
-            List<Auction> auctionList = as.showList();
-            model.addAttribute("auctionList", auctionList);
-            List<String> categories = new ArrayList();
-            for (Category category : Category.values()) {
-                categories.add(category.getValor());
-            }
-            model.addAttribute("categories", categories);
-            List<String> states = new ArrayList();
-            for (State state : State.values()) {
-                states.add(state.getValor());
-            }
-            model.addAttribute("states", states);
+            ;
+            model.addAttribute("auctionList", as.showList());
+            model.addAttribute("categories", as.categoryList());
+            model.addAttribute("states", as.stateList());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage().toString());
             return "index";
         }
         return "index";
     }
-    
-    
+
+    @PostMapping("/")
+    public String find(@RequestParam(required = false) String name, @RequestParam(required = false) String category,
+             @RequestParam(required = false) String state, ModelMap model) {
+        try {
+            List<Auction> auctions = as.findByCategory(category);
+//            model.addAttribute("auctionList", as.findByName(name));
+            model.addAttribute("auctionList", as.findByCategory(category));
+            for (Auction auction : auctions) {
+                System.out.println("SUBASTAS POR CATEGORIA::::" + auctions);
+            }
+            model.addAttribute("categories", as.categoryList());
+            model.addAttribute("states", as.stateList());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "index";
+        }
+        return "index";
+    }
+
 }
