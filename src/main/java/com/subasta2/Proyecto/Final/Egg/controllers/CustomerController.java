@@ -85,8 +85,7 @@ public class CustomerController {
         } catch (Exception e) {
             model.put("error", e.getMessage());
             return "customer/form";
-        }
-        
+        }   
     }
 
     @PostMapping("/form")
@@ -101,6 +100,53 @@ public class CustomerController {
             return "customer/form";
         }        
     }
+    
+    @GetMapping("/login")
+    public String login(){
+        
+        
+        
+        return"customer/login-form";
+    }
+    
+    @PostMapping("/login")
+    public String procesLogin(){
+        
+        
+        return "index";
+    }
+//
+//    @GetMapping("/login")
+//    public String showlogin(ModelMap model, @RequestParam(required = false) String id){
+//        try {
+//            if (id != null) {
+//                Customer customer = customerService.findById(id);
+//                model.addAttribute("customer", customer);
+//                return "customer/login-form";
+//            }else{
+//                model.addAttribute("customer", new Customer());
+//                
+//                
+//            }
+//        } catch (Exception e) {
+//            model.put("error", e.getMessage());
+//            return "customer/login-form";
+//        }
+//        return "customer/login-form";
+//    }
+//
+//    @PostMapping("/login")
+//    public String processlogin(@ModelAttribute Customer customer, ModelMap model){
+//        
+//        try{
+//            customerService.login(customer);
+//            return "index";
+//        }catch(Exception e){
+//            model.addAttribute("error ", e.getMessage());
+//            model.addAttribute("customer",customer);
+//            return "customer/login-form";
+//        }        
+//    }
 
 //    Dar de baja
 //Validar usuario antes de la compra (verificar que sea el usuario a través de mail y contraseña)
