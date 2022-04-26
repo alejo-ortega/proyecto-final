@@ -1,406 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <title>EGG</title>
-</head>
-<style>
-:root{
-    --buttons--: #79A7F3;
-    --color2--: white;
-}
-header{
-    height: 100px;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    border-bottom: solid var(--buttons--);
-    margin-bottom: 10px;
-}
-a{
-    text-decoration: none;
-    color: black;
-    
-}
-.menu2{
-    display: block;
-    width: 130px;
-    text-align: right;
-    height: max-content;
-    position: sticky;
-    top: 0px;
-    right: 5px;
-    position: absolute;
-    z-index: 1;
-    margin-top: 100px;
-    margin-right: 20px;
-    padding: 8px;
-    background-color: var(--buttons--);
-    border: solid;
-    border-radius: 20px;
-    color: var(--color2--);
-}
-.none{
-    display: none;
-}
-footer{
-    background-color: black;
-    height: 70px;
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    padding: 10px;
-    
-}
-footer a{
-    color: white;
-    margin-top: 23px;
-}
-.box1{
-    width: 99%;
-    height: max-content;
-    min-height: 700px;
-    display: flex;
-}
-.s1{
-    width: 25%;
-    max-width: 300px;
-    height: 500px;
-    border: solid;
-    border-left: none;
-    text-align: center;
-    background-color: var(--buttons--);
-}
-.btn {
-            background-color: white;
-            border: 2px solid var(--buttons--);
-            color: var(--buttons--);
-            cursor: pointer;
-            font-size: 16px;
-            margin: 20px;
-            padding: auto;
-            text-align: center;
-            border-radius: 50px;
-            padding: 5px 24px;
-            margin: auto;
-            text-align: center;
-            height: 40px;
-        }
-        .btn:hover,
-        .btn:focus {
-            color: #fff;
-            outline: 0;
-        }
-
-        .first {
-            -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-            transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-        }
-        .first:hover {
-            box-shadow: 0 0 40px 40px var(--buttons--) inset;
-            color: white;
-        }
-        .s2{
-            width: 90%;
-            height: 300px;
-            margin: auto;
-            display: flex;
-            margin-top: 0px;
-        }
-        .card{
-            width: 45%;
-            height: 80%;
-            border: solid;
-            margin: auto;
-            padding: 10px;
-            text-align: center;
-            background-color: var(--buttons--);
-        }
-        .card2{
-            display: flex;
-        }
-        .img-card{
-            width: 200px;
-            height: 150px;
-            border: solid;
-        }
-        .card-box1{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .card-box2{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 13px;
-        }
-        .btnInicio{
-            display: flex;
-        }
-        nav{
-            width: 40%;
-        }
-        .logo{
-            width: 200px;
-            height: 100px; 
-        }
-        .buscador2{
-            display: none;
-        }
-        .bs{
-            display: none;
-        }
-        .borrar{
-            display: none;
-        }
-        @media (max-width: 420px) {
-            .btnInicio{display: none;}
-            header{
-                justify-content: space-around;
-            }
-            nav{
-               border: none;
-               width: 20%;
-            }
-            .logo{
-                width: 150px;
-                height: 75px;
-            }
-            .buscador2{
-                margin-top: 25px;
-                display: block;
-            }
-            .box1{
-                height: max-content;
-            }
-            .s1{
-               display: none; 
-            }
-            .bg{
-                width: 250px;
-                border:solid;
-                z-index: 1;
-                display: block;
-                margin-top: 30px;
-                position: sticky;
-                top: 50px;
-                right: 15%;
-                position: absolute;
-                z-index: 1;
-                border-radius: 50px;
-            }
-
-            .none{
-                display: none;
-            }
-            footer{
-                font-size: 10px;
-                justify-content: space-between;
-                height: 50px;
-            }
-            footer a{
-                margin-top: 10px;
-            }
-            .s2{
-                display: block;
-                height: max-content;
-                border: none;
-            }
-            .card{
-                display: block;
-                width: 80%;
-                border: none;
-                border: solid;
-                margin-bottom: 20px;
-            }
-            .card2{
-                width: 99%;
-                display: block;;
-            }.card-box1{
-                display: block;
-            }
-            .card-box2{
-                display: block;
-            }
-            .borrar{
-            display: block;
-            color: var(--color2--);
-        }
-
-        }
-</style>
-<body>
-    <header>
-        <nav>
-            <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFwCf6Jgte_1GaxMDnxYJm_Tk4PUMYq6nwkA&usqp=CAU" alt="">
-        </nav>
-        <section class="btnInicio">
-            <a class="btn first" style="width: 80px; height: 30px; padding-top: 15px; margin: 20px;" href="">INICIO</a>
-            <a class="btn first" style="width: 100px; height: 30px; padding-top: 15px; margin: 20px;" href="">SUBASTAR</a>
-            <a class="btn first" style="width: 100px;  height: 45px;  margin: 20px;" href="">Mis <br> Productos </a>
-        </section>
-        <section class="buscador2">
-            <i class='bx bx-search bx-lg' style=" margin-left: 50px;" id="buscar"></i>
-            <section>
-                <section class="s1 bg none" id="buscar2">
-                    <section>
-                        <input style="margin-top: 30px; height: 30px; text-align: center; font-size: 25px; width: 60%;" type="text" placeholder="Buscar" name="" id="">
-                        <br>
-                        <select name="Tipo" style="width: 40%; margin-top: 30px;">
-                            
-                            <option value="">Categoria</option>
-        
-                            <option>Coche</option>
-                            
-                            <option>Avión</option>
-                            
-                            <option>Tren</option>
-                            
-                        </select>
-                        <br>
-                        <select name="Estado" style="width: 40%; margin-top: 30px;">
-        
-                            <option>Estado</option>
-        
-                            <option>Nuevo</option>
-                            
-                            <option>Usado</option>
-                            
-                            <option>Roto</option>
-                            
-                        </select>
-                        <br>
-                        <select name="transporte" style="width: 40%; margin-top: 30px;">
-        
-                            <option value="">Envio</option>
-        
-                            <option>Si</option>
-                            
-                            <option>No</option>
-                            
-                        </select>
-                        <br>
-                        <input type="text" placeholder="Precio minimo" style="width: 60%; text-align: center; margin-top: 30px"><br>
-                        <input type="text" placeholder="Precio maximo" style="width: 60%; text-align: center; margin-top: 30px"><br>
-                    </section>
-                    <button style="margin-top: 30%; width: 50%; font-size: 25px;" class="btn first">Buscar</button>
-                </section>
-            </section>
-        </section>
-        <i class='bx bxs-user-circle bx-lg' style="margin-top: 25px;" id="menu"></i>
-        <div id="menu2" class="menu2 none">
-            <a>Hola</a>
-            <p>Soy de soporte</p>
-            <p>Como estas?</p>
-            <a href="" class="borrar">INICIO</a> <br>
-            <a href="" class="borrar">SUBASTAR</a> <br>
-            <a href="" class="borrar">Mis <br> PRODUCTOS</a>
-        </div>
-    </header>
-    <main>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    >
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Subasta2</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+            />
+        <link href="/styles/cssIndex.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <div class="collapse bg-dark" id="navbarHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-md-7 py-4">
+                            <h4 class="text-white">About</h4>
+                            <p class="text-muted">
+                                Add some information about the album below, the author, or any
+                                other background context. Make it a few sentences long so folks
+                                can pick up some informative tidbits. Then, link them off to
+                                some social networking sites or contact information.
+                            </p>
+                        </div>
+                        <div class="col-sm-4 offset-md-1 py-4">
+                            <h4 class="text-white">Contact</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                                <li><a href="#" class="text-white">Email me</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar navbar-dark bg-dark shadow-sm">
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            aria-hidden="true"
+                            class="me-2"
+                            viewBox="0 0 24 24"
+                            >
+                        <path
+                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            />
+                        <circle cx="12" cy="13" r="4" />
+                        </svg>
+                        <strong>Subasta2</strong>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarHeader"
+                        aria-controls="navbarHeader"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
         <div class="box1">
             <section class="s1">
                 <section>
-                    <input style="margin-top: 30px; height: 30px; text-align: center; font-size: 25px; width: 60%;" type="text" placeholder="Buscar" name="" id="">
-                    <br>
-                    <select name="Tipo" style="width: 40%; margin-top: 30px;">
-                        
-                        <option value="">Categoria</option>
-    
-                        <option>Coche</option>
-                        
-                        <option>Avión</option>
-                        
-                        <option>Tren</option>
-                        
-                    </select>
-                    <br>
-                    <select name="Estado" style="width: 40%; margin-top: 30px;">
-    
-                        <option>Estado</option>
-    
-                        <option>Nuevo</option>
-                        
-                        <option>Usado</option>
-                        
-                        <option>Roto</option>
-                        
-                    </select>
-                    <br>
-                    <select name="transporte" style="width: 40%; margin-top: 30px;">
-    
-                        <option value="">Envio</option>
-    
-                        <option>Si</option>
-                        
-                        <option>No</option>
-                        
-                    </select>
-                    <br>
-                    <input type="text" placeholder="Precio minimo" style="width: 60%; text-align: center; margin-top: 30px"><br>
-                    <input type="text" placeholder="Precio maximo" style="width: 60%; text-align: center; margin-top: 30px"><br>
-                </section>
-                <button style="margin-top: 30%; width: 50%; font-size: 25px;" class="btn first">Buscar</button>
-            </section>
-            <section class="s2">
-                    <section class="card">                    
-                        <p>Nombre del producto</p>
-                        <section class="card2">
-                            <section class="card-box1">
-                                <img class="img-card" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="">
-                                <p>DESDE-HASTA</p>
-                            </section>
-                            <section class="card-box2">
-                                <p>Descripcion del producto:</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                                <i class='bx bx-cart-add bx-lg'></i>
-                            </section>
-                        </section>
-                    </section>
-                    <section class="card">                    
-                        <p>Nombre del producto</p>
-                        <section class="card2">
-                            <section class="card-box1">
-                                <img class="img-card" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="">
-                                <p>DESDE-HASTA</p>
-                            </section>
-                            <section class="card-box2">
-                                <p>Descripcion del producto:</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                                <i class='bx bx-cart-add bx-lg'></i>
-                            </section>
-                        </section>
-                    </section>
-                
-                <!--Una box2 contiene 2 card que cada una contiene todo lo que lleva lo que se muestra al cliente
-                cada card tiene un titulo una imagen una fecha descripcion y boton  -->
+                    <form method="post" th:action="@{/}">
+                        <input
+                            style="
+                            margin-top: 30px;
+                            height: 30px;
+                            text-align: center;
+                            font-size: 25px;
+                            width: 60%;
+                            "
+                            type="text"
+                            placeholder="Buscar"
+                            name="name"
+                            id=""
+                            value=""
+                            />
+                        <br />
+                        <label>Categoria:</label>
+                        <select name="category" style="width: 40%; margin-top: 30px">
+                            <option value="">Categoria</option>
+                            <option
+                                th:each="category : ${categories}"
+                                th:text="${category}"
+                                ></option>
+                        </select>
 
+                        <br />
+                        <label>Estado:</label>
+                        <select name="state" style="width: 40%; margin-top: 30px">
+                            <option value="">Estado</option>
+                            <option th:each="state : ${states}" th:text="${state}"></option>
+                        </select>
+
+                        <br />
+                        <label>Envio:</label>
+                        <select name="shipping" style="width: 40%; margin-top: 30px">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Precio minimo"
+                            style="width: 60%; text-align: center; margin-top: 30px"
+                            name="valueMin"
+                            value=""
+                            /><br />
+                        <input
+                            type="text"
+                            placeholder="Precio maximo"
+                            style="width: 60%; text-align: center; margin-top: 30px"
+                            name="valueMax"
+                            value=""
+                            /><br />
+                </section>
+                <button
+                    style="margin-top: 30%; width: 50%; font-size: 25px"
+                    class="btn first"
+                    type="submit"
+                    >
+                    Buscar
+                </button>
+                </form>
             </section>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div
+                        class="card"
+                        style="width: 18rem"
+                        th:each="auction : ${auctionList}"
+                        >
+                        <img
+                            src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg"
+                            class="card-img-top"
+                            alt=""
+                            />
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${auction.objects.name}"></h5>
+                            <p class="card-text" th:text="${auction.objects.description}"></p>
+                            <div class="sub">
+                                <section class="sub1">
+                                    <p>Hasta:</p>
+                                    <p
+                                        th:text="${#temporals.format(auction.auctionDate, 'dd/MM/yyyy', locale)}"
+                                        ></p>
+                                </section>
+                                <section class="sub1">
+                                    <p>Ultima Puja:</p>
+                                    <p th:text="${auction.objects.initialValue}" style="text-align: center;"></p>
+                                </section>
+                            </div>
+                            <a href="#" class="btn btn-primary">Subasta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-    </main>
-    <footer>
-        <a href="">CONTACTO</a>
-        <a href="">TERMINOS Y CONDICIONES</a>
-        <a href="">QUIENRES SOMOS</a>
-        <a href="">PREGUNTAS FRECUENTES</a>
-    </footer>
-    <script>
-        let menu = document.getElementById('menu');
-        let menu2 =  document.getElementById('menu2');
-        let buscar2 =document.getElementById('buscar2');
-        let buscar = document.getElementById('buscar');
-        menu.addEventListener('click', ()=>{
-            menu2.classList.toggle("none"); 
-        });
-        buscar.addEventListener('click', ()=>{
-            buscar2.classList.toggle("none");
-        });
-    </script>
-</body>
+        <div class="container">
+            <footer
+                class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+                >
+                <div class="col-md-4 d-flex align-items-center">
+                    <a
+                        href="/"
+                        class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+                        >
+                        <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" />
+                        </svg>
+                    </a>
+                    <span class="text-muted">&copy; 2021 Company, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#twitter" /></svg
+                            ></a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram" /></svg
+                            ></a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#facebook" /></svg
+                            ></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
