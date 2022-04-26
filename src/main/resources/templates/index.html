@@ -79,6 +79,7 @@
                 </div>
             </div>
         </header>
+        <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
         <div class="box1">
             <section class="s1">
                 <section>
@@ -95,20 +96,22 @@
                             placeholder="Buscar"
                             name="name"
                             id=""
+                            value=""
                             />
                         <br />
                         <label>Categoria:</label>
                         <select name="category" style="width: 40%; margin-top: 30px">
+                            <option value="">Categoria</option>
                             <option
                                 th:each="category : ${categories}"
                                 th:text="${category}"
-                                th:value="${category}"
                                 ></option>
                         </select>
 
                         <br />
                         <label>Estado:</label>
                         <select name="state" style="width: 40%; margin-top: 30px">
+                            <option value="">Estado</option>
                             <option th:each="state : ${states}" th:text="${state}"></option>
                         </select>
 
@@ -120,16 +123,18 @@
                         </select>
                         <br />
                         <input
-                            type="number"
+                            type="text"
                             placeholder="Precio minimo"
                             style="width: 60%; text-align: center; margin-top: 30px"
-                            name="minimalPrice"
+                            name="valueMin"
+                            value=""
                             /><br />
                         <input
-                            type="number"
+                            type="text"
                             placeholder="Precio maximo"
                             style="width: 60%; text-align: center; margin-top: 30px"
-                            name="maximumPrice"
+                            name="valueMax"
+                            value=""
                             /><br />
                 </section>
                 <button
