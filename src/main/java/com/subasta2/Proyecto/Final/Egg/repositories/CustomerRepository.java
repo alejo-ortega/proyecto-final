@@ -12,5 +12,4 @@ public interface CustomerRepository extends JpaRepository<Customer, String>{
     
 
     public Customer findByEmailContaining(String email);
-
 }

@@ -42,24 +42,20 @@ public class CustomerService implements UserDetailsService{
         customer.setPicture(picture);
         
         customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
-        customerrepository.save(customer);        
+        customerrepository.save(customer);
     }
     
-    @Transactional (rollbackOn = {Exception.class})
-    public void login (Customer customer)throws Exception{
-        setOn(customer);
-        
-        if (customer.getEmail().isEmpty() || customer.getEmail().contains(" ") || customer.getEmail() == null) {
-            throw new Exception("El email ingresado es invalido");
-        }        
-        if (customer.getPassword().isEmpty() || customer.getPassword().contains(" ") || customer.getPassword() == null) {
-            throw new Exception("La contraseña ingresada es invalida");
-        }  
-        
-        
-        
-        
-    }
+    
+//    public void login (Customer customer)throws Exception{
+//        setOn(customer);
+//        
+//        if (customer.getEmail().isEmpty() || customer.getEmail().contains(" ") || customer.getEmail() == null) {
+//            throw new Exception("El email ingresado es invalido");
+//        }        
+//        if (customer.getPassword().isEmpty() || customer.getPassword().contains(" ") || customer.getPassword() == null) {
+//            throw new Exception("La contraseña ingresada es invalida");
+//        }  
+//    }
     
         
     @Transactional (rollbackOn = {Exception.class})
