@@ -1,14 +1,9 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
-import com.subasta2.Proyecto.Final.Egg.entities.Auction;
-import com.subasta2.Proyecto.Final.Egg.enums.Category;
-import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import com.subasta2.Proyecto.Final.Egg.services.CustomerService;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
 import com.subasta2.Proyecto.Final.Egg.services.PictureService;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,18 +45,15 @@ public class IndexController {
 
     @PostMapping("/")
     public String find(@RequestParam(required = false) String name, @RequestParam(required = false) String category,
-             @RequestParam(required = false) String state, ModelMap model) {
+            @RequestParam(required = false) String state, @RequestParam(required = false) String valueMin, @RequestParam(required = false) String valueMax, ModelMap model) {
         try {
-            List<Auction> auctions = as.findByCategory(category);
-//            model.addAttribute("auctionList", as.findByName(name));
-            model.addAttribute("auctionList", as.findByCategory(category));
-            for (Auction auction : auctions) {
-                System.out.println("SUBASTAS POR CATEGORIA::::" + auctions);
-            }
+            model.addAttribute("auctionList", as.findByAll(name, category, state, valueMin, valueMax));
             model.addAttribute("categories", as.categoryList());
             model.addAttribute("states", as.stateList());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
+            model.put("categories", as.categoryList());
+            model.put("states", as.stateList());
             return "index";
         }
         return "index";

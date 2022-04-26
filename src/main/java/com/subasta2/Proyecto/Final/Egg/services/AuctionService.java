@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class AuctionService implements ServiceInterface<Auction> {
@@ -86,7 +85,54 @@ public class AuctionService implements ServiceInterface<Auction> {
     }
 
     public List<Auction> findByCategory(String category) throws Exception {
-        List<Auction> auctions = auctionRepository.findByObjectsName(category.toUpperCase());
+        List<Auction> auctions = auctionRepository.findByObjectsCategory(category);
         return auctions;
+    }
+
+    public List<Auction> findByState(String state) throws Exception {
+        List<Auction> auctions = auctionRepository.findByObjectsState(state);
+        return auctions;
+    }
+
+    public List<Auction> findByValue(Double valueMin, Double valueMax) throws Exception {
+        List<Auction> auctions = auctionRepository.findByValue(valueMin, valueMax);
+        return auctions;
+    }
+
+    public List<Auction> findByAll(String name, String category, String state, String valueMin, String valueMax) throws Exception {
+        if (valueMin.trim().isEmpty() || valueMin == null) {
+            System.out.println("precio minimo esta vacio");
+            valueMin = "0.00";
+        }
+        if (valueMax.trim().isEmpty() || valueMax == null) {
+            System.out.println("precio maximo esta vacio");
+            valueMax = "1000000000000.00";
+        }
+        Double valueMin2 = Double.parseDouble(valueMin);
+        Double valueMax2 = Double.parseDouble(valueMax);
+        List<Auction> auctions1 = new ArrayList();
+        List<Auction> auctions2 = new ArrayList();
+        List<Auction> auctions3 = new ArrayList();
+        List<Auction> listByName = auctionRepository.findByObjectsName(name);
+        List<Auction> listByCategory = auctionRepository.findByObjectsCategory(category);
+        List<Auction> listByState = auctionRepository.findByObjectsState(state);
+        List<Auction> listByValue = auctionRepository.findByValue(valueMin2, valueMax2);
+        for (Auction auction : listByCategory) {
+            if (listByName.contains(auction)) {
+                auctions1.add(auction);
+            }
+        }
+        for (Auction auction : listByValue) {
+            if (listByState.contains(auction)) {
+                auctions2.add(auction);
+            }
+        }
+        for (Auction auction : auctions1) {
+            if (auctions2.contains(auction)) {
+                auctions3.add(auction);
+            }
+        }
+
+        return auctions3;
     }
 }
