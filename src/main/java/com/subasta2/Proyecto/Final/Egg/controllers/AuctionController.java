@@ -28,7 +28,6 @@ public class AuctionController {
     }
     
     
-    
     /**
      * Sends the auction list to the HTML by a model, so it can be shown on the
      * FrontEnd.
@@ -40,7 +39,7 @@ public class AuctionController {
         List<Auction> auctions = auctionService.showList() ;
         model.addAttribute("auctions", auctions);
         Category[]  categories = Category.values();
-        return "auction/list-auctions";
+        return "/index";
     }
     
     /**
@@ -55,12 +54,16 @@ public class AuctionController {
      * @return
      */
     @GetMapping("/form")
-    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel, @RequestParam(required = false) String id){
+    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel, @RequestParam(required = false) String objectId, @RequestParam(required = false) String auctionId){
         
         try {
             objectController.categoryList(categoryModel);
             objectController.stateList(stateModel);
+            objectModel.addAttribute("objects", new Object());
+            objectController.showForm(objectModel, objectId);
+            auctionModel.addAttribute("auction", new Auction());
         } catch (Exception e) {
+            e.getStackTrace();
         }
         return "auction/auction-form";
     }
