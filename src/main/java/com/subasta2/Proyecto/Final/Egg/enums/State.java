@@ -20,4 +20,5 @@ public enum State {
         return valor;
     }
 
+    
 }

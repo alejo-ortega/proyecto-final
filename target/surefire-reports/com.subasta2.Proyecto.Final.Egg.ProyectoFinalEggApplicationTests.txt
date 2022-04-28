@@ -1,12 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.302 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.757 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
->>>>>>> ba3179c261ce104827bcb2ccfbafd759cb8004ae
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.346 s - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
->>>>>>> a0c501be8b6a0ed2a90b24a661e94886d57c2cb1
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.145 s <<< FAILURE! - in com.subasta2.Proyecto.Final.Egg.ProyectoFinalEggApplicationTests
+contextLoads  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+
