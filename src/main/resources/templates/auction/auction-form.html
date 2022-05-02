@@ -42,19 +42,18 @@
                 <label for="initialValue">Valor Inicial</label>
                 <input type="number" id="initialValue" value="" step="0.01" th:field="*{initialValue}" name="initialValue">
             </div>
-
-            <div th:object="${auction}">
+            <!-- <div th:object="${auctions}">-->
                 <div class="form-group row">
                     <label for="id">Id</label>
                     <div>
-                        <input type="hidden" th:value="${auction.id}">
+                        <input type="hidden" th:value="${auctions.Id}">
                     </div>
                 </div>
                 <div class="form-group col-md-1">
                     <label for="auctionDate">Fecha de Cierre</label>
-                    <input type="date" id="auctionDate" th:field="*{auctionDate}" name="actionDate">
+                    <input type="date" name="actionDate" id="auctionDate" th:field="${auctions.auctionDate}">
                 </div>
-            </div>
+            <!--</div> -->
             <div class="form-group col-md-1">
                 <input type="submit" value="Subastar!" class="btn btn-outline-primary" >
             </div>
