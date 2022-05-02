@@ -9,6 +9,7 @@
     </head>
 
     <body>
+        <nav th:replace="fragments/fragments::navbar"></nav>
         <h1>Crear subasta</h1>
 
         <form th:action="@{/auction/form}" method="POST" th:object="${objects}">
