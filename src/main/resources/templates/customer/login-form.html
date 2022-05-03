@@ -9,6 +9,7 @@
     <link href="/styles/cssIndex.css" rel="stylesheet">
 </head>
     <body class="text-center bg-light">
+        <nav th:replace="fragments/fragments::navbar"></nav>
         <main class="form-signin">
         <div class="form-floating" style="width: 50%; margin-left: 25%;">
             <form class="form" th:action="@{/logincheck}" method="post">
@@ -29,6 +30,7 @@
                 <p th:if="${error != null}" th:text="${error}" style="color : red;"></p>
                 <button type="submit" class="btn btn-primary">Log In</button>
 <!--                <p class="text-danger" th:if="${error != null }" th:text="${error}"></p>-->
+                <p>¿No tienes una cuenta? Pulsa <a href="/customer/form">aquí</a> para crear una!</p>
             </form>
         </div>
         </main>
