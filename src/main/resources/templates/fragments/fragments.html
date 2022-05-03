@@ -21,13 +21,13 @@
 
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/auction/form">Nuevo Reclamo</a>
+                            <a class="nav-link" href="/auction/form">Nueva Subasta</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/auction">Ver Reclamos</a>
+                            <a class="nav-link" href="/auction">Ver Subastas</a>
                         </li>
                     </ul>
 
@@ -36,8 +36,8 @@
                     </form>
 
                     <div sec:Authorize="!isAuthenticated()">
-                        <a href="/login/register"><button type="button" class="btn btn-primary">Registrate</button></a>
-                        <a href="login/"><button type="button" class="btn btn-secondary">Inicia sesión</button></a>
+                        <a href="/customer/form"><button type="button" class="btn btn-primary">Registrate</button></a>
+                        <a href="/customer/login/"><button type="button" class="btn btn-secondary">Inicia sesión</button></a>
                     </div>
                 </div>
             </nav>
