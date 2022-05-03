@@ -37,7 +37,7 @@ public class IndexController {
             model.addAttribute("categories", as.categoryList());
             model.addAttribute("states", as.stateList());
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage().toString());
+            model.addAttribute("error", e.getMessage());
             return "index";
         }
         return "index";
