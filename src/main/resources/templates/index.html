@@ -173,7 +173,8 @@
                                     <p th:text="${auction.objects.initialValue}" style="text-align: center;"></p>
                                 </section>
                             </div>
-                            <a href="#" class="btn btn-primary">Subasta</a>
+
+                            <a th:href="@{/auction/__${auction.id}__}"  class="btn btn-primary">Subasta</a>
                         </div>
                     </div>
                 </div>
