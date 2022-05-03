@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    >
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Subasta2</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+            />
+        <link href="/styles/cssIndex.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <div class="collapse bg-dark" id="navbarHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-md-7 py-4">
+                            <h4 class="text-white">About</h4>
+                            <p class="text-muted">
+                                Add some information about the album below, the author, or any
+                                other background context. Make it a few sentences long so folks
+                                can pick up some informative tidbits. Then, link them off to
+                                some social networking sites or contact information.
+                            </p>
+                        </div>
+                        <div class="col-sm-4 offset-md-1 py-4">
+                            <h4 class="text-white">Contact</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                                <li><a href="#" class="text-white">Email me</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar navbar-dark bg-dark shadow-sm">
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            aria-hidden="true"
+                            class="me-2"
+                            viewBox="0 0 24 24"
+                            >
+                        <path
+                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            />
+                        <circle cx="12" cy="13" r="4" />
+                        </svg>
+                        <strong>Subasta2</strong>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarHeader"
+                        aria-controls="navbarHeader"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
+        <div class="box1">
+            <section class="s1">
+                <section>
+                    <form method="post" th:action="@{/}">
+                        <input
+                            style="
+                            margin-top: 30px;
+                            height: 30px;
+                            text-align: center;
+                            font-size: 25px;
+                            width: 60%;
+                            "
+                            type="text"
+                            placeholder="Buscar"
+                            name="name"
+                            id=""
+                            value=""
+                            />
+                        <br />
+                        <label>Categoria:</label>
+                        <select name="category" style="width: 40%; margin-top: 30px">
+                            <option value="">Categoria</option>
+                            <option
+                                th:each="category : ${categories}"
+                                th:text="${category}"
+                                ></option>
+                        </select>
+
+                        <br />
+                        <label>Estado:</label>
+                        <select name="state" style="width: 40%; margin-top: 30px">
+                            <option value="">Estado</option>
+                            <option th:each="state : ${states}" th:text="${state}"></option>
+                        </select>
+
+                        <br />
+                        <label>Envio:</label>
+                        <select name="shipping" style="width: 40%; margin-top: 30px">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Precio minimo"
+                            style="width: 60%; text-align: center; margin-top: 30px"
+                            name="valueMin"
+                            value=""
+                            /><br />
+                        <input
+                            type="text"
+                            placeholder="Precio maximo"
+                            style="width: 60%; text-align: center; margin-top: 30px"
+                            name="valueMax"
+                            value=""
+                            /><br />
+                </section>
+                <button
+                    style="margin-top: 30%; width: 50%; font-size: 25px"
+                    class="btn first"
+                    type="submit"
+                    >
+                    Buscar
+                </button>
+                </form>
+            </section>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div
+                        class="card"
+                        style="width: 18rem"
+                        th:each="auction : ${auctionList}"
+                        >
+                        <img
+                            src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg"
+                            class="card-img-top"
+                            alt=""
+                            />
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${auction.objects.name}"></h5>
+                            <p class="card-text" th:text="${auction.objects.description}"></p>
+                            <div class="sub">
+                                <section class="sub1">
+                                    <p>Hasta:</p>
+                                    <p
+                                        th:text="${#temporals.format(auction.auctionDate, 'dd/MM/yyyy', locale)}"
+                                        ></p>
+                                </section>
+                                <section class="sub1">
+                                    <p>Ultima Puja:</p>
+                                    <p th:text="${auction.objects.initialValue}" style="text-align: center;"></p>
+                                </section>
+                            </div>
+                            <a href="#" class="btn btn-primary">Subasta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <footer
+                class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+                >
+                <div class="col-md-4 d-flex align-items-center">
+                    <a
+                        href="/"
+                        class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+                        >
+                        <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" />
+                        </svg>
+                    </a>
+                    <span class="text-muted">&copy; 2021 Company, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#twitter" /></svg
+                            ></a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram" /></svg
+                            ></a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#"
+                           ><svg class="bi" width="24" height="24">
+                            <use xlink:href="#facebook" /></svg
+                            ></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

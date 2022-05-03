@@ -1,0 +1,28 @@
+.box1{
+    min-height: 20%;
+    display: flex;
+    margin-top: 2%;
+}
+.s1{
+    width: 25%;
+    max-width: 300px;
+    height: 500px;
+    border: solid;
+    border-left: none;
+    text-align: center;
+    background-color: var(--buttons--);
+}
+.card{
+    margin: 2%;
+}
+footer{
+    font-size: 10px;
+    justify-content: space-between;
+    height: 50px;
+}
+.sub{
+    display: flex;
+}
+.sub1{
+    margin-left: 10%;
+}
