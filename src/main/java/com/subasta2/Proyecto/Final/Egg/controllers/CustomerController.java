@@ -167,7 +167,6 @@ public class CustomerController {
 //            return "customer/login-form";
 //        }        
 //    }
-
 //    Dar de baja
 //Validar usuario antes de la compra (verificar que sea el usuario a través de mail y contraseña)
 //Validar si el usuario está en estado de alta al loguearse
