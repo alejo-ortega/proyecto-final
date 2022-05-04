@@ -26,27 +26,27 @@ public class CustomerController {
 
     @GetMapping
     public String showList(ModelMap model) {
-        
-        try{
+
+        try {
             List<Customer> customers = customerService.showList();
             model.addAttribute("customers", customers);
             return "customer/list-customers";
-        }catch(Exception e){
+        } catch (Exception e) {
             model.put("error", e.getMessage());
             return "/customers/list-customers";
         }
     }
 
     @GetMapping("/edit-profile")
-    public String activate(@RequestParam String id, ModelMap model){
-        
-        try{
+    public String activate(@RequestParam String id, ModelMap model) {
+
+        try {
             model.addAttribute("customer", customerService.findById(id));
-        }catch (Exception e){
+        } catch (Exception e) {
             model.put("error", e.getMessage());
             return "/customers/list-customers";
         }
-        
+
         return "customer/list-customers";
     }
 
@@ -62,17 +62,16 @@ public class CustomerController {
 
         return "redirect:/customer/list-customers";
     }
-    
+
     /*
-    
-    modifique tanto en el GetMapping como en El PostMapping 
+
+    modifique tanto en el GetMapping como en El PostMapping
     para poder hacer un buen uso de los recursos tanto como en registar como editar,
     lo probe con un usuario y me ha handado bien cualquier bug porfavor reportarlo a su superior al mando
-    
-    */
-    
+
+     */
     @GetMapping("/form")
-    public String showForm(ModelMap model, @RequestParam(required = false) String id){
+    public String showForm(ModelMap model, @RequestParam(required = false) String id) {
         try {
             if (id == null) {
                 model.addAttribute("customer", new Customer());
@@ -85,68 +84,29 @@ public class CustomerController {
         } catch (Exception e) {
             model.put("error", e.getMessage());
             return "customer/form";
-        }   
+        }
     }
 
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Customer customer, ModelMap model, MultipartFile file){
-        
-        try{
-            customerService.register(customer,file);
+    public String processForm(@ModelAttribute Customer customer, ModelMap model, MultipartFile file) {
+
+        try {
+            customerService.register(customer, file);
             return "index";
-        }catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("error ", e.getMessage());
-            model.addAttribute("customer",customer);
+            model.addAttribute("customer", customer);
             return "customer/form";
-        }        
+        }
     }
-    
+
     @GetMapping("/login")
-    public String login(){
-        
-        
-        
-        return"customer/login-form";
+    public String login(@RequestParam(required = false) String error, ModelMap model) {
+        if (error != null) {
+            model.put("error", "Email o Contraseña incorrectos");
+        }
+        return "customer/login-form";
     }
-    
-    @PostMapping("/login")
-    public String procesLogin(){
-        
-        
-        return "index";
-    }
-//
-//    @GetMapping("/login")
-//    public String showlogin(ModelMap model, @RequestParam(required = false) String id){
-//        try {
-//            if (id != null) {
-//                Customer customer = customerService.findById(id);
-//                model.addAttribute("customer", customer);
-//                return "customer/login-form";
-//            }else{
-//                model.addAttribute("customer", new Customer());
-//                
-//                
-//            }
-//        } catch (Exception e) {
-//            model.put("error", e.getMessage());
-//            return "customer/login-form";
-//        }
-//        return "customer/login-form";
-//    }
-//
-//    @PostMapping("/login")
-//    public String processlogin(@ModelAttribute Customer customer, ModelMap model){
-//        
-//        try{
-//            customerService.login(customer);
-//            return "index";
-//        }catch(Exception e){
-//            model.addAttribute("error ", e.getMessage());
-//            model.addAttribute("customer",customer);
-//            return "customer/login-form";
-//        }        
-//    }
 
 //    Dar de baja
 //Validar usuario antes de la compra (verificar que sea el usuario a través de mail y contraseña)

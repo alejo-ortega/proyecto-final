@@ -30,8 +30,7 @@ public class AuctionController {
         this.auctionService = auctionService;
         this.objectController = objectController;
     }
-    
-    
+
     /**
      * Sends the auction list to the HTML by a model, so it can be shown on the
      * FrontEnd.
@@ -43,12 +42,13 @@ public class AuctionController {
     public String showList(ModelMap model) {
         List<Auction> auctions = auctionService.showList();
         model.addAttribute("auctions", auctions);
-        Category[]  categories = Category.values();
+        Category[] categories = Category.values();
         return "/index";
     }
 
     /**
      * Shows a Form tha allows the seller to create a new auction.
+     *
      * @param categoryModel
      * @param stateModel
      * @param model
@@ -58,13 +58,13 @@ public class AuctionController {
      * @return
      */
     @GetMapping("/form")
-    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel){
-        
+    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel) {
+
         try {
             objectController.categoryList(categoryModel);
             objectController.stateList(stateModel);
             objectModel.addAttribute("objects", new Objects());
-            
+
             auctionModel.addAttribute("auctions", new Auction());
         } catch (Exception e) {
             e.getStackTrace();
@@ -74,20 +74,21 @@ public class AuctionController {
 
     /**
      * This method persist the auction information into the DataBase
+     *
      * @param object
      * @param auction
      * @param model
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Objects object, ModelMap model, @ModelAttribute Auction auction){
-        try{
+    public String processForm(@ModelAttribute Objects object, ModelMap model, @ModelAttribute Auction auction) {
+        try {
             objectController.objectService.save(object);
             auction.setObjects(object);
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             auctionService.save(auction);
-        }catch(Exception e){
-            model.addAttribute("error "+ e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error " + e.getMessage());
             return "redirect:/auction/form";
         }
         return "redirect:/auction";
