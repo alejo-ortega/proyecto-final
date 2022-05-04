@@ -1,0 +1,10 @@
+img{
+    width: 40%;
+}
+.div1{
+float: inline-start;
+}
+
+.div2{
+float: inline-end;
+}
