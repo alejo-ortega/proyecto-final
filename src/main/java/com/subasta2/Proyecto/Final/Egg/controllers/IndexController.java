@@ -32,7 +32,6 @@ public class IndexController {
     @GetMapping
     public String index(ModelMap model) {
         try {
-            ;
             model.addAttribute("auctionList", as.showList());
             model.addAttribute("categories", as.categoryList());
             model.addAttribute("states", as.stateList());

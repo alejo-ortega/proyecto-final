@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Detalle Subasta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <div>
+            <h1 th:text="${auction.objects.toString()}"></h1>
+            
+            <h1 th:text="${auction.objects.name}"></h1>
+            <h2>Categoría: <span th:text="${auction.objects.category}"></span></h2>
+            <h2>Estado: <span th:text="${auction.objects.state}"></span></h2>
+            <p th:text="${auction.objects.description}"></p>
+        </div>
+    </body>
+</html>
