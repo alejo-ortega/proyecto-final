@@ -102,7 +102,7 @@ public class CustomerController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error, ModelMap model) {
+    public String login( String error, ModelMap model) {
         if (error != null) {
             model.put("error", "Email o Contraseña incorrectos");
         }
