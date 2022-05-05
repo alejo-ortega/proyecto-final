@@ -108,15 +108,15 @@ public class CustomerController {
         }
         return "customer/login-form";
     }
+    
+
     @GetMapping("/profile")
     public String profile(ModelMap model, HttpSession session) {
 
         try {
 //            Customer customer = customerService.findById(id);
             Customer customer = (Customer) session.getAttribute("customersession");
-            System.out.println("customer3 = " + customer);
             model.addAttribute("customer", customer);
-            System.out.println("customer4 = " + customer);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
