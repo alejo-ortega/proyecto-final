@@ -3,6 +3,7 @@ package com.subasta2.Proyecto.Final.Egg.controllers;
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.services.CustomerService;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -106,6 +107,32 @@ public class CustomerController {
             model.put("error", "Email o Contraseña incorrectos");
         }
         return "customer/login-form";
+    }
+
+    @GetMapping("/profile")
+
+    public String profile(ModelMap model, HttpSession session) {
+
+        try {
+//            Customer customer = customerService.findById(id);
+            Customer customer = (Customer) session.getAttribute("customersession");
+            model.addAttribute("customer", customer);
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "customer/profile";
+    }
+
+    @PostMapping("/profile")
+    public String procesProfile(@RequestParam String id, ModelMap model, Customer customer, MultipartFile file) {
+        try {
+            customer = customerService.findById(id);
+            customerService.edit(customer, file);
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+
+        return "index";
     }
 
 //    Dar de baja
