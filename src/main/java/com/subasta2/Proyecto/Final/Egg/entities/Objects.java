@@ -1,12 +1,8 @@
 package com.subasta2.Proyecto.Final.Egg.entities;
 
-import com.subasta2.Proyecto.Final.Egg.enums.Category;
-import com.subasta2.Proyecto.Final.Egg.enums.State;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,13 +18,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Objects {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String Id;
+    private String id;
 
     private String name;
 
@@ -40,13 +35,11 @@ public class Objects {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate soldDate;
-    
-    @Enumerated(EnumType.STRING)
-    private State state;
-    
-    @Enumerated(EnumType.STRING)
-     private Category category;
-    
+
+    private String state;
+
+    private String category;
+
     private Boolean active;
     private Boolean sold;
 
