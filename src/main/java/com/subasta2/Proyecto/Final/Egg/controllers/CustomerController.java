@@ -65,11 +65,11 @@ public class CustomerController {
     }
 
     /*
-    
-    modifique tanto en el GetMapping como en El PostMapping 
+
+    modifique tanto en el GetMapping como en El PostMapping
     para poder hacer un buen uso de los recursos tanto como en registar como editar,
     lo probe con un usuario y me ha handado bien cualquier bug porfavor reportarlo a su superior al mando
-    
+
      */
     @GetMapping("/form")
     public String showForm(ModelMap model, @RequestParam(required = false) String id) {
@@ -102,22 +102,21 @@ public class CustomerController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@RequestParam(required = false) String error, ModelMap model) {
+        if (error != null) {
+            model.put("error", "Email o Contraseña incorrectos");
+        }
         return "customer/login-form";
     }
-
-    @PostMapping("/login")
-    public String procesLogin() {
-        return "index";
-    }
-
     @GetMapping("/profile")
     public String profile(ModelMap model, HttpSession session) {
 
         try {
 //            Customer customer = customerService.findById(id);
             Customer customer = (Customer) session.getAttribute("customersession");
+            System.out.println("customer3 = " + customer);
             model.addAttribute("customer", customer);
+            System.out.println("customer4 = " + customer);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
@@ -135,38 +134,7 @@ public class CustomerController {
 
         return "index";
     }
-//
-//    @GetMapping("/login")
-//    public String showlogin(ModelMap model, @RequestParam(required = false) String id){
-//        try {
-//            if (id != null) {
-//                Customer customer = customerService.findById(id);
-//                model.addAttribute("customer", customer);
-//                return "customer/login-form";
-//            }else{
-//                model.addAttribute("customer", new Customer());
-//                
-//                
-//            }
-//        } catch (Exception e) {
-//            model.put("error", e.getMessage());
-//            return "customer/login-form";
-//        }
-//        return "customer/login-form";
-//    }
-//
-//    @PostMapping("/login")
-//    public String processlogin(@ModelAttribute Customer customer, ModelMap model){
-//        
-//        try{
-//            customerService.login(customer);
-//            return "index";
-//        }catch(Exception e){
-//            model.addAttribute("error ", e.getMessage());
-//            model.addAttribute("customer",customer);
-//            return "customer/login-form";
-//        }        
-//    }
+
 //    Dar de baja
 //Validar usuario antes de la compra (verificar que sea el usuario a través de mail y contraseña)
 //Validar si el usuario está en estado de alta al loguearse

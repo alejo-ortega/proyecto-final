@@ -1,4 +1,3 @@
-
 package com.subasta2.Proyecto.Final.Egg.config;
 
 import com.subasta2.Proyecto.Final.Egg.services.CustomerService;
@@ -14,19 +13,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-    
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     public CustomerService customerService;
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customerService).
                 passwordEncoder(new BCryptPasswordEncoder());
     }
-    
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
@@ -37,11 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login?error=true").permitAll()
+                .failureUrl("/customer/login?error=error").permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/customer/login")
                 .permitAll()
                 .and().csrf().disable();
     }
