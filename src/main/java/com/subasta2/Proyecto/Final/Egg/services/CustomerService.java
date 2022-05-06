@@ -1,8 +1,8 @@
-
 package com.subasta2.Proyecto.Final.Egg.services;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Picture;
+import com.subasta2.Proyecto.Final.Egg.enums.Role;
 import com.subasta2.Proyecto.Final.Egg.repositories.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,109 +22,109 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class CustomerService implements UserDetailsService{
-    
+public class CustomerService implements UserDetailsService {
+
     private CustomerRepository customerrepository;
     private PictureService ps;
-    
-    @Autowired    
+
+    @Autowired
     public CustomerService(CustomerRepository customerrepository, PictureService ps) {
         this.customerrepository = customerrepository;
         this.ps = ps;
     }
-        
-    @Transactional (rollbackOn = {Exception.class})
-    public void register(Customer customer, MultipartFile file) throws Exception{  
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void register(Customer customer, MultipartFile file) throws Exception {
         setOn(customer);
         validation(customer);
-        
+        customer.setRole(Role.USER);
         Picture picture = ps.save(file);
         customer.setPicture(picture);
-        
+
         customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
-        customerrepository.save(customer);        
+        customerrepository.save(customer);
     }
-        
-    @Transactional (rollbackOn = {Exception.class})
-    public void edit(Customer customer, MultipartFile file) throws Exception{      
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void edit(Customer customer, MultipartFile file) throws Exception {
         validation(customer);
-        
+
         String idPicture = null;
         if (customer.getPicture() != null) {
             idPicture = customer.getPicture().getId();
         }
-        Picture picture = ps.edit(idPicture,file);
-        customer.setPicture(picture);        
-        
+        Picture picture = ps.edit(idPicture, file);
+        customer.setPicture(picture);
+
         customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
-        
+
         customerrepository.save(customer);
-    }    
-    
-    @Transactional (rollbackOn = {Exception.class})
-    public void addBalance(String id, Double balance) throws Exception{
+    }
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void addBalance(String id, Double balance) throws Exception {
         Customer customer = findById(id);
         customer.setBalance(balance);
         customerrepository.save(customer);
     }
-    
+
     @Transactional
     public Customer findById(String id) throws Exception {
         return customerrepository.findById(id).orElseThrow(() -> new Exception("No se encontro el usuario"));
     }
-        
-    public List<Customer> showList(){
+
+    public List<Customer> showList() {
         return customerrepository.findAll();
     }
-        
-    public Customer showObject(String id) throws Exception{
+
+    public Customer showObject(String id) throws Exception {
         return findById(id);
     }
 
-    private void validation(Customer customer) throws Exception {        
-        if (customer.getName().isEmpty() || customer.getName().equals(" ") || customer.getName() == null || customer.getName().length()<2) {
+    private void validation(Customer customer) throws Exception {
+        if (customer.getName().isEmpty() || customer.getName().equals(" ") || customer.getName() == null || customer.getName().length() < 2) {
             throw new Exception("El nombre ingresado es invalido");
-        }        
-        if (customer.getLastName().isEmpty() || customer.getLastName().equals(" ") || customer.getLastName() == null || customer.getLastName().length()<2) {
+        }
+        if (customer.getLastName().isEmpty() || customer.getLastName().equals(" ") || customer.getLastName() == null || customer.getLastName().length() < 2) {
             throw new Exception("El apellido ingreado es invalido");
-        }        
+        }
         if (customer.getDni().length() < 8 || customer.getDni().length() > 10 || customer.getDni().isEmpty() || customer.getDni().equals(" ") || customer.getDni() == null) {
             throw new Exception("El DNI ingreado es invalido");
-        }        
+        }
         if (customer.getEmail().isEmpty() || customer.getEmail().contains(" ") || customer.getEmail() == null) {
             throw new Exception("El email ingresado es invalido");
-        }        
+        }
         if (customer.getPassword().isEmpty() || customer.getPassword().contains(" ") || customer.getPassword() == null) {
             throw new Exception("La contraseña ingresada es invalida");
-        }                
+        }
     }
-    
-    public void checkActive(Customer customer) throws Exception{
+
+    public void checkActive(Customer customer) throws Exception {
         if (customer.getActive().equals(false)) {
             throw new Exception("El usuario seleccionado esta dado de baja");
         }
     }
-    
+
     @Transactional(rollbackOn = {Exception.class})
     public void activate(String id) throws Exception {
         Customer customer = findById(id);
         customer.setActive(true);
     }
-    
+
     @Transactional(rollbackOn = {Exception.class})
     public void deactivate(String id) throws Exception {
         Customer customer = findById(id);
         customer.setActive(false);
     }
-    
-     @Transactional(rollbackOn = {Exception.class})
-    public void onOff(String id) throws Exception{
+
+    @Transactional(rollbackOn = {Exception.class})
+    public void onOff(String id) throws Exception {
         Customer customer = findById(id);
-         if (customer.getActive() == null || customer.getActive() == false) {
+        if (customer.getActive() == null || customer.getActive() == false) {
             activate(id);
-         }else{
-            deactivate(id);            
-         } 
+        } else {
+            deactivate(id);
+        }
     }
 
     private void setOn(Customer customer) {
@@ -132,29 +132,29 @@ public class CustomerService implements UserDetailsService{
             customer.setActive(true);
         }
     }
-    
+
     @Transactional
-    public void setStars(Customer customer,Integer stars){        
+    public void setStars(Customer customer, Integer stars) {
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        
-        Customer customer = customerrepository.findByEmailContaining(email);
-        
+
+        Customer customer = customerrepository.findByEmail(email);
+
         if (customer == null) {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
-        
+
         List<GrantedAuthority> permissions = new ArrayList<>();
-        GrantedAuthority rolePermissions = new SimpleGrantedAuthority("ROLE_"+customer.getRole().toString());
+        GrantedAuthority rolePermissions = new SimpleGrantedAuthority("ROLE_" + customer.getRole().toString());
         permissions.add(rolePermissions);
-        
+
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        
+
         HttpSession session = attr.getRequest().getSession(true);
         session.setAttribute("customersession", customer);
-        
-        return new User(customer.getEmail(),customer.getPassword(),permissions);        
+
+        return new User(customer.getEmail(), customer.getPassword(), permissions);
     }
 }

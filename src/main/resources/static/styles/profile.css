@@ -1,0 +1,13 @@
+.box1 {
+    float: left;
+    width: 50%;
+    margin-left: 2%;
+    margin-top: 5%;
+
+}
+
+.profile-image{
+    float: right;
+    margin-right: 6%;
+    margin-top: 5%;
+}
