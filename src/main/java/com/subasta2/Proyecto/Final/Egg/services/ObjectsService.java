@@ -7,6 +7,7 @@ import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.exceptions.ExceptionService;
 import com.subasta2.Proyecto.Final.Egg.interfaces.ServiceInterface;
 import com.subasta2.Proyecto.Final.Egg.repositories.ObjectsRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -112,14 +113,24 @@ public class ObjectsService implements ServiceInterface<Objects> {
         object.setActive(!object.getActive());
     }
     
-    public Category[] categoryArray (){
+    public ArrayList<String> categoryArray (){
         Category[] categories = Category.values();
-        return categories;
+        ArrayList <String> categoriesList = new ArrayList();
+        for (Category category : categories) {
+            String cat = category.toString();
+            categoriesList.add(cat);
+        }
+        return categoriesList;
     }
     
-    public State[] stateArray (){
+    public ArrayList <String> stateArray (){
         State[] states = State.values();
-        return states;
+        ArrayList<String> stateList = new ArrayList();
+        for (State state : states) {
+            String stateString = state.toString();
+            stateList.add(stateString);
+        }
+        return stateList;
     }
     
 }
