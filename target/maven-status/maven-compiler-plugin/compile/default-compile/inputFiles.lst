@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Role.java
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\IndexController.java
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\ObjectController.java
@@ -24,30 +23,3 @@ E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\config\SecurityConfig.java
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\State.java
 E:\Carpeta de proyectos\Final copia 2\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.java
-=======
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\config\SecurityConfig.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\ServletInitializer.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\State.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\CustomerRepository.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Category.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\IndexController.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\enums\Role.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\ObjectsRepository.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\interfaces\ServiceInterface.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\AuctionRepository.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\repositories\PictureRepository.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\ObjectsService.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\PictureService.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\ProyectoFinalEggApplication.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\exceptions\ExceptionService.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\AuctionController.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\ObjectController.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\CustomerService.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Picture.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Customer.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\util\LocalDateConverter.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Auction.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\services\AuctionService.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\controllers\CustomerController.java
-C:\Users\fdale\Documents\NetBeansProjects\Proyecto final\proyecto-final\src\main\java\com\subasta2\Proyecto\Final\Egg\entities\Objects.java
->>>>>>> 6b14df02268b2c79ad697edc0c1773868cc5f10a
