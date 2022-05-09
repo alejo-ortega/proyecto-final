@@ -19,7 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Controller
 @RequestMapping("/auction")
-//@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+//@PreAuthorize("hasAnyRole('ROLE_USER')")
 public class AuctionController {
 
     private final ObjectController objectController;
