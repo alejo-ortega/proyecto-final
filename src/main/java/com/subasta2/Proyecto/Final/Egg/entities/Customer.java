@@ -1,4 +1,3 @@
-
 package com.subasta2.Proyecto.Final.Egg.entities;
 
 import com.subasta2.Proyecto.Final.Egg.enums.Role;
@@ -7,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,38 +24,38 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Customer {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
-    
+
     @EqualsAndHashCode.Include
     private String Dni;
-    
+
     private String name;
-    private String lastName;     
-    private String email;    
+    private String lastName;
+    private String email;
     private String password;
-    
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
-     
+
     @OneToOne
     private Picture picture;
-    
+
     private Boolean verificate;
-    
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Objects> objectPush;
-    
+
     @OneToMany
     private List<Objects> objectHistorySold;
-    
+
     private Double balance;
-    private Boolean active;   
-    
+    private Boolean active;
+
 }

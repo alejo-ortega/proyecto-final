@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/auction")
@@ -59,14 +58,18 @@ public class AuctionController {
      * @return
      */
     @GetMapping("/form")
-    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel, @RequestParam(required = false) String id) {
+    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel) {
 
         try {
             objectController.categoryList(categoryModel);
             objectController.stateList(stateModel);
+            objectModel.addAttribute("objects", new Objects());
+
+            auctionModel.addAttribute("auctions", new Auction());
         } catch (Exception e) {
+            e.getStackTrace();
         }
-        return "auction/auction-form";
+        return "auction/auction-form.html";
     }
 
     /**
@@ -77,12 +80,15 @@ public class AuctionController {
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Auction auction, ModelMap model) {
+    public String processForm(@ModelAttribute Objects object, ModelMap model, @ModelAttribute Auction auction) {
         try {
+            objectController.objectService.save(object);
+            auction.setObjects(object);
+
             auctionService.save(auction);
         } catch (Exception e) {
             model.addAttribute("error " + e.getMessage());
-            return "redirect:";
+            return "redirect:/auction/form";
         }
         return "redirect:/auction";
     }
