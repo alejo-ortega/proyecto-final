@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Detalle Subasta</title>
+        <title>[[${auction.objects.name}]] | Subasta2</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            #debug {
+                margin: 1rem;
+                padding: 1rem;
+                font-family: "monospace";
+                color: white;
+                background-color: black;
+                border-radius: 4px;
+            }
+        </style>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
 
     <body>
-        <div>
-            <h1 th:text="${auction.objects.toString()}"></h1>
-            
-            <h1 th:text="${auction.objects.name}"></h1>
-            <h2>Categoría: <span th:text="${auction.objects.category}"></span></h2>
-            <h2>Estado: <span th:text="${auction.objects.state}"></span></h2>
-            <p th:text="${auction.objects.description}"></p>
+        <!-- Navbar fragment -->
+        <div></div>
+
+        <div style="display: flex; align-items: center; width: 100%; padding: 32px">
+            <div style="width: 100%">
+                <img style="width: 80%; max-width: 100%;" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="Imágen del producto" />
+
+                <div style="margin-top: 16px">
+                    <h3>Descripción</h3>
+                    <p th:text="${auction.objects.description}"></p>
+                </div>
+            </div>
+
+            <div style="width: 100%">
+                <h1 th:text="${auction.objects.name}"></h1>
+
+                <div style="display: flex; align-items: center; color: gray; gap: 8px;">
+                    <h2 style="font-size: 16px;" >Categoría: <span th:text="${auction.objects.category}"></span></h2>
+                    <h2 style="font-size: 16px;" >Estado: <span th:text="${auction.objects.state}"></span></h2>
+                </div>
+
+                <div sec:Authorize="!isAuthenticated()">
+                    <p>Para participar en la subasta haga click <a href="#">acá</a> para iniciar sesión o <a href="#">acá</a> para registrarse.</p>
+                </div>
+
+                <form sec:Authorize="isAuthenticated()">
+                    <div class="form-group">
+                        <label class="form-label">Cantidad</label>
+                        <input class="form-control" type="number" />
+                        <button type="submit" class="btn-primary">Pujar</button>
+                    </div>
+                </form>
+            </div>
         </div>
+
+        <div id="debug" th:text="${auction.toString()}"></div>
     </body>
 </html>

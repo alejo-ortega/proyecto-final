@@ -16,6 +16,18 @@
             crossorigin="anonymous"
             />
         <link href="/styles/cssIndex.css" rel="stylesheet" />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body>
         <header>
@@ -42,6 +54,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="navbar navbar-dark bg-dark shadow-sm">
                 <div class="container">
                     <a href="#" class="navbar-brand d-flex align-items-center">
@@ -85,20 +98,12 @@
                 <section>
                     <form method="post" th:action="@{/}">
                         <input
-                            style="
-                            margin-top: 30px;
-                            height: 30px;
-                            text-align: center;
-                            font-size: 25px;
-                            width: 60%;
-                            "
+                            style="margin-top: 30px;height: 30px;text-align: center;font-size: 25px;width: 60%;"
                             type="text"
                             placeholder="Buscar"
                             name="name"
-                            id=""
-                            value=""
                             />
-                        <br />
+
                         <label>Categoria:</label>
                         <select name="category" style="width: 40%; margin-top: 30px">
                             <option value="">Categoria</option>
@@ -218,15 +223,6 @@
                 </ul>
             </footer>
         </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-            crossorigin="anonymous"
-        ></script>
+
     </body>
 </html>
