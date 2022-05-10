@@ -1,9 +1,14 @@
-.form{
-    background-color: #E6E6FA;
-    padding: 10px;
+.fondo{
+    background-color: rgba(255,250,249,255);    
 }
 
-.title{
-    color: blue;
+.img{
+    background-image: url("/imagen/img.jpg") ;
+    background-size: 100%;
+    width: 72 ;
+    height: 72;
 }
 
+.imagen{
+    background-image: url(/static/imagen/img.jpg);
+}

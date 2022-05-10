@@ -16,8 +16,9 @@
             crossorigin="anonymous"
             />
         <link href="/styles/cssIndex.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/styles/form.css">
     </head>
-    <body>
+    <body class="fondo">
         <nav th:replace="fragments/fragments::navbar"></nav>
         <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
         <div class="box1">
@@ -132,7 +133,8 @@
                         <use xlink:href="#bootstrap" />
                         </svg>
                     </a>
-                    <span class="text-muted">&copy; 2021 Company, Inc</span>
+                    <span class="text-muted">&copy; 2021 Subasta2 Company, Inc. Todo lo que quieras vender/comprar al alcanze de un click
+                    </span>
                 </div>
 
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
