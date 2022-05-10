@@ -1,11 +1,13 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import java.sql.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -80,17 +82,16 @@ public class AuctionController {
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Objects object, ModelMap model,@RequestParam Date auctionDate) {
+    public String processForm(@ModelAttribute Objects object, ModelMap model,@RequestParam Date auctionDate, HttpSession session) {
         try {
+            Customer customer = (Customer) session.getAttribute("customersession");
             System.out.println("Fecha de subasta"+auctionDate);
-            
+            System.out.println(customer.getId());
             Auction auction = new Auction();
             auction.setAuctionDate(auctionDate);
-            objectController.objectService.save(object);
+            objectController.objectService.newObject(object, customer);
             auction.setObjects(object);
-            
             auctionService.save(auction);
-            
         } catch (Exception e) {
             model.addAttribute("error " + e.getMessage());
             return "redirect:/auction/form";

@@ -132,4 +132,11 @@ public class ObjectsService implements ServiceInterface<Objects> {
         }
         return stateList;
     }
+    
+    public void newObject(Objects object, Customer customer) throws Exception {
+        validate(object);
+        object.setCustomer(customer);
+        object.setActive(true);
+        objectsRepository.save(object);
+    }
 }
