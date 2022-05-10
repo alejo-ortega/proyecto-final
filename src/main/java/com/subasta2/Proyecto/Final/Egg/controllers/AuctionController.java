@@ -5,6 +5,7 @@ import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/auction")
@@ -59,14 +61,12 @@ public class AuctionController {
      * @return
      */
     @GetMapping("/form")
-    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel, ModelMap auctionModel) {
+    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel) {
 
         try {
             objectController.categoryList(categoryModel);
             objectController.stateList(stateModel);
             objectModel.addAttribute("objects", new Objects());
-
-            auctionModel.addAttribute("auctions", new Auction());
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -81,12 +81,17 @@ public class AuctionController {
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Objects object, ModelMap model, @ModelAttribute Auction auction) {
+    public String processForm(@ModelAttribute Objects object, ModelMap model, @RequestParam Date auctionDate) {
         try {
+            System.out.println("Fecha de subasta" + auctionDate);
+            /*
+            Auction auction = new Auction();
+            auction.setAuctionDate(auctionDate);
             objectController.objectService.save(object);
             auction.setObjects(object);
 
             auctionService.save(auction);
+             */
         } catch (Exception e) {
             model.addAttribute("error " + e.getMessage());
             return "redirect:/auction/form";
