@@ -19,36 +19,34 @@
                 
                     <div class="mb-3">
                         <label for="InputEmail" class="form-label">Direccion de mail:</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" th:value="*{email}">
+                        <input type="email" readonly th:value="${customer.email}" class="form-control" id="exampleInputEmail1" >
+                       
                     </div>
                     <div class="mb-3">
                         <label for="InputPassword" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" th:value="*{password}" id="Password"th:value="*{password}">
+                        <input type="password" readonly class="form-control" th:value="${customer.password}" id="Password">
                         
                     </div>
                     <div class="mb-3">
                         <label for="InputName" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" th:value="*{name}" id="Name">
+                        <input type="text" readonly class="form-control" th:value="${customer.name}" id="Name">
                     </div>
                     <div class="mb-3">
                         <label for="InputLastName" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" th:value="*{lastName}" id="Lastname">
+                        <input type="text" readonly class="form-control" th:value="${customer.lastName}" id="Lastname">
                     </div>
                     <div class="mb-3">
                         <label for="InputDNI" class="form-label">DNI:</label>
-                        <input type="text" class="form-control" th:value="*{Dni}" id="DNI">
+                        <input type="text" readonly class="form-control" th:value="${customer.Dni}" id="DNI">
                     </div>
                     <div class="mb-3">
                         <label for="InputBirthDate" class="form-label">Fecha de Nacimiento:</label>
-                        <input type="date" class="form-control" th:value="*{birthDate}" id="birthDate">
+                        <input type="date" readonly class="form-control" th:value="${customer.birthDate}" id="birthDate">
                     </div>
-                    <div class="mb-3">
-                        <label for="Picture" class="form-label">Foto de perfil:</label>
-                        <input type="file" class="form-control" id="Picture" name="file">
-                    </div>
+                    
                 
                     <p th:if="${error != null}" th:text="${error}" style="color : red;"></p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    
                 </form>
                 </section>
                 
@@ -57,6 +55,7 @@
         </div>
         <div class="profile-image">
             <img src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" class="rounded-circle mx-auto d-block" width="250" height="250">
+            <button type="" class="btn btn-primary">Editar Perfil</button>
         </div>
         
         

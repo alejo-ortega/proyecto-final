@@ -132,7 +132,7 @@ public class CustomerController {
             model.addAttribute("error", e.getMessage());
         }
 
-        return "index";
+        return "/";
     }
 
 //    Dar de baja
