@@ -10,8 +10,8 @@
     </head>
     <body class="text-center bg-light">
         <nav th:replace="fragments/fragments::navbar"></nav>
-        <main class="form-signin">
-            
+        <main class="form-signin fondo">
+            <img id="img.jpg" src="/imagen/img2.jpg" alt="" width="120" height="120"/>
             <div class="form-floating" style="width: 50%; margin-left: 25%;">
                 <form class="form" th:action="@{/customer/form}" th:object="${customer}" method="POST" enctype="multipart/form-data">
                     <div class="text-center">
