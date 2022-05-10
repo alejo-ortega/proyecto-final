@@ -21,14 +21,24 @@
     </head>
 
     <body>
-        <!-- Navbar fragment -->
-        <div></div>
+        <nav th:replace="fragments/fragments::navbar"></nav>
 
-        <div style="display: flex; align-items: center; width: 100%; padding: 32px">
+        <div th:if="${error != null}">
+            <p style="color: red;" th:text="${error}"></p>
+        </div>
+
+        <div th:if="${success != null}">
+            <p style="color: green;" th:text="${success}"></p>
+        </div>
+
+
+        <div style="display: flex; padding: 32px; margin: 16px;">
+
+
             <div style="width: 100%">
-                <img style="width: 80%; max-width: 100%;" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="Imágen del producto" />
+                <img style="width: 75%; max-width: 100%;" src="https://www.lifeder.com/wp-content/uploads/2018/06/concepto-de-arte-caras-min-1024x678.jpg" alt="Imágen del producto" />
 
-                <div style="margin-top: 16px">
+                <div>
                     <h3>Descripción</h3>
                     <p th:text="${auction.objects.description}"></p>
                 </div>
@@ -36,23 +46,44 @@
 
             <div style="width: 100%">
                 <h1 th:text="${auction.objects.name}"></h1>
+                <h5>Precio inicial: $<span th:text="${auction.objects.initialValue}"></span></h5>
 
-                <div style="display: flex; align-items: center; color: gray; gap: 8px;">
-                    <h2 style="font-size: 16px;" >Categoría: <span th:text="${auction.objects.category}"></span></h2>
-                    <h2 style="font-size: 16px;" >Estado: <span th:text="${auction.objects.state}"></span></h2>
+                <div>
+                    <h2>Categoría: <span th:text="${auction.objects.category}"></span></h2>
+                    <h2>Estado: <span th:text="${auction.objects.state}"></span></h2>
                 </div>
 
                 <div sec:Authorize="!isAuthenticated()">
-                    <p>Para participar en la subasta haga click <a href="#">acá</a> para iniciar sesión o <a href="#">acá</a> para registrarse.</p>
+                    <p>Para participar en la subasta haga click <a href="/customer/login">acá</a> para iniciar sesión o <a href="/customer/form">acá</a> para registrarse.</p>
                 </div>
 
-                <form sec:Authorize="isAuthenticated()">
-                    <div class="form-group">
-                        <label class="form-label">Cantidad</label>
-                        <input class="form-control" type="number" />
-                        <button type="submit" class="btn-primary">Pujar</button>
+                <div sec:Authorize="isAuthenticated()">
+                    <div th:if="${auction.bid != null}">
+                        <p>Último participante de la subasta: <span th:object="${auction.customerList[auction.customerList.size()-1]}">
+                                <span style="font-weight: bold;" th:text="*{name + ' ' + lastName}"></span>
+                                <span class="text-muted" th:text="*{email}"></span>
+                            </span>
+                        </p>
+
+
+                        <p>Valor actual: <span th:text="${auction.bid}"></span></p>
                     </div>
-                </form>
+
+                    <div th:if="${auction.bid == null}">
+                        <p>¡La subasta sigue con el valor inicial!</p>
+                    </div>
+
+                    <form th:action="@{/auction/create-bid}" method="post" th:object="${auction}">
+                        <input style="display: none;" th:field="*{id}" />
+
+                        <div class="form-group">
+                            <label class="form-label">Cantidad</label>
+                            <input class="form-control" min="${auction.objects.initialValue}" th:value="${auction.bid == null ? auction.objects.initialValue : auction.bid}" id="bid" name="bid" type="number" />
+                        </div>
+
+                        <button type="submit" class="btn-primary">Pujar</button>
+                    </form>
+                </div>
             </div>
         </div>
 

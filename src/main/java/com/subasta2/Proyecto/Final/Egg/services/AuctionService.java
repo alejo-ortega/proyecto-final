@@ -1,23 +1,28 @@
 package com.subasta2.Proyecto.Final.Egg.services;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.interfaces.ServiceInterface;
 import com.subasta2.Proyecto.Final.Egg.repositories.AuctionRepository;
+import com.subasta2.Proyecto.Final.Egg.repositories.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuctionService implements ServiceInterface<Auction> {
 
-    public AuctionRepository auctionRepository;
+    private AuctionRepository auctionRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    public AuctionService(AuctionRepository auctionRepository) {
+    public AuctionService(AuctionRepository auctionRepository, CustomerRepository customerRepository) {
         this.auctionRepository = auctionRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -134,5 +139,36 @@ public class AuctionService implements ServiceInterface<Auction> {
         }
 
         return auctions3;
+    }
+
+    public void updateBid(String auctionId, Double bid, String email) throws Exception {
+        if (email == null) {
+            throw new Exception("NO fue provisto un email.");
+        }
+
+        try {
+            Optional<Auction> optionalAuction = auctionRepository.findById(auctionId);
+
+            if (optionalAuction.isEmpty()) {
+                throw new Exception("No se encontró una subasta con el ID provisto.");
+            }
+
+            Auction auction = optionalAuction.get();
+
+            if (auction.getMinimumValue() >= bid || (auction.getBid() != null && auction.getBid() >= bid)) {
+                throw new Exception("Se intentó hacer una puja con un valor inferior al valor inicial o inferior a la última puja.");
+            } else {
+                Customer customer = customerRepository.findByEmail(email);
+                List<Customer> customers = auction.getCustomerList();
+                if (!customers.contains(customer)) {
+                    customers.add(customer);
+                    auction.setCustomerList(customers);
+                }
+                auction.setBid(bid);
+                auctionRepository.save(auction);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

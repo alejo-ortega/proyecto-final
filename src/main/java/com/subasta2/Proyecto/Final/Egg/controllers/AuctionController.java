@@ -7,6 +7,7 @@ import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -103,5 +104,19 @@ public class AuctionController {
         }
 
         return "auction/auction-detail";
+    }
+
+    @PostMapping("/create-bid")
+    public String createBid(@ModelAttribute("auction") Auction auction, ModelMap model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        try {
+            auctionService.updateBid(auction.getId(), auction.getBid(), email);
+            model.addAttribute("success", "¡Se realizó tu puja con éxito!");
+        } catch (Exception e) {
+            model.addAttribute("error", e);
+        }
+
+        return "redirect:/auction/" + auction.getId();
     }
 }
