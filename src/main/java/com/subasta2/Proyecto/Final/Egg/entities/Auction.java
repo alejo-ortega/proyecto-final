@@ -1,6 +1,7 @@
 
 package com.subasta2.Proyecto.Final.Egg.entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Auction {
     private Customer customerBuyer;
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate auctionDate;
+    private Date auctionDate;
     
     private Double minimumValue;
     private Double bid;

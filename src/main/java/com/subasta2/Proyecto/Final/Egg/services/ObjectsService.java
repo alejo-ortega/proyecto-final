@@ -132,5 +132,4 @@ public class ObjectsService implements ServiceInterface<Objects> {
         }
         return stateList;
     }
-    
 }
