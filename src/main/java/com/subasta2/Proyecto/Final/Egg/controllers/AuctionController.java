@@ -82,20 +82,16 @@ public class AuctionController {
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Objects object, ModelMap model,@RequestParam Date auctionDate, HttpSession session) {
-        try {
-            Customer customer = (Customer) session.getAttribute("customersession");
-            System.out.println("Fecha de subasta"+auctionDate);
-            System.out.println(customer.getId());
-            Auction auction = new Auction();
-            auction.setAuctionDate(auctionDate);
-            objectController.objectService.newObject(object, customer);
-            auction.setObjects(object);
-            auctionService.save(auction);
+    public String processForm(@ModelAttribute Objects objects, ModelMap model,@RequestParam Date auctionDate) {
+        try {          
+                               
+            objectController.objectService.saveAdd(objects,auctionDate);    
+            return "redirect:/auction";
         } catch (Exception e) {
-            model.addAttribute("error " + e.getMessage());
-            return "redirect:/auction/form";
+            System.out.println(e.getMessage());
+            model.put("error", e.getMessage());
+            return "/auction/auction-form";
         }
-        return "redirect:/auction";
+        
     }
 }
