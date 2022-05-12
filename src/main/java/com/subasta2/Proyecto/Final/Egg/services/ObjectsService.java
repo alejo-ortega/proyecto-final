@@ -1,5 +1,6 @@
 package com.subasta2.Proyecto.Final.Egg.services;
 
+import com.subasta2.Proyecto.Final.Egg.entities.Auction;
 import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
@@ -7,6 +8,8 @@ import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.exceptions.ExceptionService;
 import com.subasta2.Proyecto.Final.Egg.interfaces.ServiceInterface;
 import com.subasta2.Proyecto.Final.Egg.repositories.ObjectsRepository;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -18,12 +21,14 @@ public class ObjectsService implements ServiceInterface<Objects> {
 
     private ObjectsRepository objectsRepository;
     private CustomerService customerService;
+    private AuctionService as;
 
     @Autowired
-    public ObjectsService(ObjectsRepository objectsRepository, CustomerService customerService) {
+    public ObjectsService(ObjectsRepository objectsRepository, CustomerService customerService, AuctionService as) {
         this.objectsRepository = objectsRepository;
         this.customerService = customerService;
-    }
+        this.as = as;
+    }    
 
     public Objects findById(String id) throws ExceptionService {
         if (id.trim().isEmpty()) {
@@ -36,6 +41,17 @@ public class ObjectsService implements ServiceInterface<Objects> {
         } else {
             throw new ExceptionService("no se encontro un objeto con ese id");
         }
+    }
+    
+    @Transactional
+    public void saveAdd(Objects objects,Date auctionDate) throws Exception{
+        Auction auction = new Auction();        
+        auction.setMinimumValue(objects.getInitialValue());
+        auction.setObjects(objects);
+        objects.setAuction(auction);
+        
+        as.save(auction);
+        save(objects);
     }
 
     @Transactional(rollbackOn = {Exception.class})
@@ -112,14 +128,30 @@ public class ObjectsService implements ServiceInterface<Objects> {
         object.setActive(!object.getActive());
     }
     
-    public Category[] categoryArray (){
+    public ArrayList<String> categoryArray (){
         Category[] categories = Category.values();
-        return categories;
+        ArrayList <String> categoriesList = new ArrayList();
+        for (Category category : categories) {
+            String cat = category.toString();
+            categoriesList.add(cat);
+        }
+        return categoriesList;
     }
     
-    public State[] stateArray (){
+    public ArrayList <String> stateArray (){
         State[] states = State.values();
-        return states;
+        ArrayList<String> stateList = new ArrayList();
+        for (State state : states) {
+            String stateString = state.toString();
+            stateList.add(stateString);
+        }
+        return stateList;
     }
     
+    public void newObject(Objects object, Customer customer) throws Exception {
+        validate(object);
+        object.setCustomer(customer);
+        object.setActive(true);
+        objectsRepository.save(object);
+    }
 }

@@ -3,6 +3,8 @@ package com.subasta2.Proyecto.Final.Egg.entities;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -35,9 +37,9 @@ public class Objects {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate soldDate;
-
+    
     private String state;
-
+    
     private String category;
 
     private Boolean active;

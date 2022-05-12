@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CustomerService implements UserDetailsService {
 
-    private CustomerRepository customerrepository;
+    CustomerRepository customerrepository;
     private PictureService ps;
 
     @Autowired

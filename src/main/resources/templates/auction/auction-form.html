@@ -19,9 +19,9 @@
             <form class="form-in" th:action="@{/auction/form}" method="POST" th:object="${objects}">
                 <div class="form-group row">                    
                     <div>
-                        <input type="hidden" th:value="${objects.id}">
+                        <input type="hidden" th:value="${objects.id}" th:field="*{id}">
                     </div>
-                </div>
+                </div>                
                 <div class="mb-3">
                     <label for="name">Nombre del Objeto</label>
                     <input type="text" class="form-control" id="name" placeholder="Smart TV Samsung" th:field="*{name}" name="name">
@@ -51,6 +51,9 @@
                         <label for="auctionDate">Fecha de Cierre</label>
                         <input type="date" name="auctionDate" id="auctionDate" value="auctionDate">
                     </div>
+                </div>
+                <div>
+                    <p th:if="${error != null}" th:text="${error}" style="color : red;"></p>
                 </div>
                 <div class="mb-3 ">
                     <input type="submit" value="Subastar!" class="btn btn-outline-primary" >

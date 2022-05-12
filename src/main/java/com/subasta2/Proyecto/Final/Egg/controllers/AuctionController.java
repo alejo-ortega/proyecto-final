@@ -1,12 +1,13 @@
 package com.subasta2.Proyecto.Final.Egg.controllers;
 
 import com.subasta2.Proyecto.Final.Egg.entities.Auction;
+import com.subasta2.Proyecto.Final.Egg.entities.Customer;
 import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.services.AuctionService;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Controller
 @RequestMapping("/auction")
-@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+//@PreAuthorize("hasAnyRole('ROLE_USER')")
 public class AuctionController {
 
     private final ObjectController objectController;
@@ -60,11 +61,11 @@ public class AuctionController {
      * @return
      */
     @GetMapping("/form")
-    public String showForm(ModelMap categoryModel, ModelMap stateModel, ModelMap objectModel) {
+    public String showForm(ModelMap category, ModelMap state, ModelMap objectModel) {
 
         try {
-            objectController.categoryList(categoryModel);
-            objectController.stateList(stateModel);
+            objectController.categoryList(category);
+            objectController.stateList(state);
             objectModel.addAttribute("objects", new Objects());
         } catch (Exception e) {
             e.getStackTrace();
@@ -81,21 +82,16 @@ public class AuctionController {
      * @return
      */
     @PostMapping("/form")
-    public String processForm(@ModelAttribute Objects object, ModelMap model,@RequestParam Date auctionDate) {
-        try {
-            System.out.println("Fecha de subasta"+auctionDate);
-            /*
-            Auction auction = new Auction();
-            auction.setAuctionDate(auctionDate);
-            objectController.objectService.save(object);
-            auction.setObjects(object);
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            auctionService.save(auction);
-            */
+    public String processForm(@ModelAttribute Objects objects, ModelMap model,@RequestParam Date auctionDate) {
+        try {          
+                               
+            objectController.objectService.saveAdd(objects,auctionDate);    
+            return "redirect:/auction";
         } catch (Exception e) {
-            model.addAttribute("error " + e.getMessage());
-            return "redirect:/auction/form";
+            System.out.println(e.getMessage());
+            model.put("error", e.getMessage());
+            return "/auction/auction-form";
         }
-        return "redirect:/auction";
+        
     }
 }

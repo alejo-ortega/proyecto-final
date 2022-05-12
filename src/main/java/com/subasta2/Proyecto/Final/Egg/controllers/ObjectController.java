@@ -4,6 +4,7 @@ import com.subasta2.Proyecto.Final.Egg.entities.Objects;
 import com.subasta2.Proyecto.Final.Egg.enums.Category;
 import com.subasta2.Proyecto.Final.Egg.enums.State;
 import com.subasta2.Proyecto.Final.Egg.services.ObjectsService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,13 +108,12 @@ public class ObjectController {
     
     public void categoryList (ModelMap model){
         
-        Category [] categories = objectService.categoryArray();
+        ArrayList<String> categories = objectService.categoryArray();
         model.addAttribute("categories", categories);
     }
     
     public void stateList (ModelMap model){
-        
-        State [] states = objectService.stateArray();
+        ArrayList<String> states = objectService.stateArray();
         model.addAttribute("states", states);
     }
 }
